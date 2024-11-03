@@ -30,7 +30,7 @@ public class table_settings extends Activity {
         table_set.setWebChromeClient(new WebChromeClient());
 
 //웹 뷰가 보여줄 웹 문서 로드
-        table_set.loadUrl("file:///android_asset/table_settings.html");
+        table_set.loadUrl("file:///android_asset/drag_and_drop2.html");
     }
 //    이전 키 눌렀을 때, 뒤로 이동 가능. 뒤로 갈 수 없으면 앱 종료
     public void onBackPassed(){

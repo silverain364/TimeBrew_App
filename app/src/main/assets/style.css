@@ -1,0 +1,365 @@
+
+body {
+    user-select: none;
+    margin: 0
+}
+
+button {
+
+}
+
+.tool-container {
+    border-radius: 10px;
+    margin: 5px;
+    background-color: rgba(102, 118, 174, 0.34);
+}
+
+.container-line {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    padding: 5px;
+    background-color: rgba(234, 231, 231, 0.5);
+    border-radius: 8px;
+}
+
+.container-line:hover {
+    background-color: rgba(196, 244, 199, 0.34);
+}
+
+.container-draggable {
+    cursor: move;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    margin: 5px;
+    padding: 5px;
+    background-color: rgb(164, 150, 140);
+    border-radius: 8px;
+}
+
+.resource {
+    position: relative !important;
+}
+
+.container-draggable:hover {
+    background-color: rgb(108, 98, 91);
+}
+
+.table-1{
+    width: 45px;
+    height: 45px;
+
+}
+
+.table-4{
+    width: 90px;
+    height: 90px;
+}
+
+.draggable {
+    cursor: move;
+    border: none;
+    border-radius: 8px;
+    margin: 6px;
+    font-size: 20px;
+    background: #dbcbc0;
+    transition: width 0.5s ease, height 0.5s ease; /* 애니메이션 효과 설정 */
+}
+
+.draggable.focus {
+    border: 2px #704620 solid;
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+}
+
+.container-draggable.dragging {
+    opacity: 0.5;
+}
+
+.draggable:hover {
+    background-color: rgb(246, 238, 232);
+}
+
+.floating-box {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+
+.waste-btn {
+    margin: 10px;
+    pointer-events: none;
+    user-select: none;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(237, 94, 94, 0.71); /* 기본 배경색 */
+    border-radius: 20%; /* 둥근 버튼 */
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.waste-in-object {
+    background-color: orangered !important;
+}
+
+.waste-in {
+    background-color: orangered !important;
+    border: 2px dashed #ff4500; /* 테두리를 점선으로 강조 */
+    transform: scale(1.1); /* 요소가 약간 커지도록 조정 */
+    transition: background-color 0.5s ease, transform 0.1s ease; /* 부드러운 전환 */
+}
+
+
+.zoom-btn {
+    width: 30px;
+    height: 30px;
+    background-color: #6595b8; /* 기본 배경색 */
+    border: none;
+    border-radius: 20%; /* 둥근 버튼 */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 버튼 그림자 */
+    user-select: none;
+}
+
+
+.zoom-btn:hover {
+    background-color: #094d50; /* 호버 시 색상 변경 */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 */
+}
+
+.zoom-btn:active {
+    background-color: rgba(48, 63, 113, 0.62); /* 클릭 시 색상 */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자 축소 */
+    transform: scale(0.95); /* 클릭 시 버튼 살짝 축소 */
+}
+
+#zoom-container {
+    top: 0;
+    left: 100%;
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+#waste-container {
+    position: absolute;
+    bottom: 20px;
+    left: calc(-70px - 20px);
+}
+
+.item {
+    position: absolute;
+}
+
+
+.item:hover {
+    background-color: rgb(234, 231, 231);
+    cursor: pointer;
+    border-width: 20px;
+}
+
+#workspace {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 7px;
+    touch-action: none;
+    position: absolute;
+    z-index: 1;
+    transition: transform 0.3s ease; /*부드러운 애니메이션*/
+}
+
+#tool-container {
+    padding: 10px 20px 10px 20px;
+    position: fixed;
+    width: 20vw;
+    height: 100%;
+    right: 0;
+    background-color: rgb(112, 70, 32);
+    display: flex;
+    z-index: 2;
+    gap: 10px;
+    flex-direction: column;
+    transition: right 0.3s ease; /* 애니메이션 적용 */
+}
+
+#tool-container.close{
+    right: calc(-20vw - 40px);
+}
+
+.tool-container-detail {
+    background-color: rgb(255, 255, 255);
+    border-radius: 7px;
+    padding: 5px;
+    height: 80%;
+}
+
+#main-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.table-container {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+#left-sideTab {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    background-color: #333;
+    top: 0;
+    left: -20%; /* 처음에 화면 밖으로 숨김 */
+    transition: left 0.3s ease; /* 애니메이션 적용 */
+    color: white;
+    padding: 15px;
+    box-sizing: border-box;
+    z-index: 2;
+
+}
+
+/* 탭이 열렸을 때 */
+#left-sideTab.open {
+    left: 0%; /* 화면 안으로 탭 이동 */
+}
+
+/* 탭 안의 내용 */
+#sideTab h2 {
+    margin-top: 0;
+}
+
+
+#left-backBtn{
+    position: absolute; /* 부모 요소 기준으로 배치 */
+    top: 15px;
+    right: 10px;
+}
+
+/* 화살표 머리 스타일 */
+.arrow-head {
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid #ffffff; /* 삼각형 색상 */
+}
+
+.arrow-head:hover{
+    border-right: 30px solid #8f7171;
+}
+
+
+/* 폼 스타일 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"] {
+    width: 30%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* 라디오 버튼 스타일 */
+
+
+.radio-group input[type="radio"] {
+    margin: 5px;
+}
+
+.radio-group {
+    width: 80%;
+    display: flex;
+    margin: 5px;
+    gap: 15px;
+}
+
+.radio-custom {
+    display: none; /* 기본 라디오 버튼 숨김 */
+}
+
+.radio-label {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 2px solid #4CAF50;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #4CAF50;
+    transition: 0.3s;
+}
+
+.radio-custom:checked + .radio-label {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.circle-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 60%;
+    width: 45px;          /* 버튼 크기 */
+    height: 45px;
+    background-color: rgb(188, 157, 135);  /* 연한 회색 배경과 투명도 */
+    border-radius: 50%;   /* 원형으로 만들기 */
+    font-size: 32px;      /* 글자 크기 */
+    font-weight: bold;
+    color: #ffffff;          /* 글자 색 */
+    border: none;         /* 테두리 제거 */
+    cursor: pointer;      /* 마우스 포인터 변경 */
+}
+
+.circle-button:hover {
+    background-color: rgb(112, 70, 32); /* 호버 시 배경 조금 진하게 */
+}
+
+#tool-container-toggleBtn{
+    position: absolute;
+    left: -60px;
+    top: 50%;
+}
+
+.afterImage{
+    pointer-events: none !important;
+    position: absolute;
+    max-height: 10%;
+    z-index: 3;
+}
