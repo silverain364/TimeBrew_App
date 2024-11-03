@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white">
+    >
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="TimeBrew ☕"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintLeft_toLeftOf="parent"
+              android:layout_marginLeft="20dp"
+              android:layout_marginTop="12dp"
+              android:textSize="20dp"
+              android:textStyle="bold"
+    />
+
+
+
+<!--테이블 작성을 위해 TableLayout 사용-->
+
+<!--매칭 완료 된 테이블과 아두이노 리스트-->
+    <TableLayout
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/connect_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="64dp"
+            android:stretchColumns="*"
+            android:background="@drawable/con_table_outline">
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="36dp"
+                android:text="연결 완료 리스트"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="#543118"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+        />
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="32dp"
+                    android:text="ADIN 005"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+            />
+            <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="32dp"
+                    android:text="Table 003"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+
+            />
+
+        </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F0F0F0">
+
+            <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="32dp"
+                    android:text="ADIN 009"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+            />
+            <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="32dp"
+                    android:text="Table 007"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+
+            />
+
+        </TableRow><TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="95dp"
+                android:layout_height="32dp"
+                android:text="ADIN 001"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="@drawable/con_table_inline"
+        />
+        <TextView
+                android:layout_width="95dp"
+                android:layout_height="32dp"
+                android:text="Table 010"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="@drawable/con_table_inline"
+
+        />
+
+    </TableRow>
+
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F0F0F0">
+
+            <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="32dp"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+            />
+            <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="32dp"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+            />
+
+        </TableRow>
+    </TableLayout>
+
+<!--해제할 연결 리스트 선택-->
+    <TextView
+            android:layout_width="236dp"
+            android:layout_height="44dp"
+            android:id="@+id/select_disc"
+            app:layout_constraintTop_toBottomOf="@+id/connect_list"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="48dp"
+            android:background="#EAE7E7"
+            android:text="—"
+            android:textSize="24sp"
+            android:gravity="center"
+    />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/disc_arduino"
+            app:layout_constraintTop_toTopOf="@+id/select_disc"
+            app:layout_constraintLeft_toLeftOf="@+id/select_disc"
+            android:layout_marginLeft="10dp"
+            android:text="ADIN 009"
+            android:gravity="center"
+    />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/disc_table"
+            app:layout_constraintTop_toTopOf="@+id/select_disc"
+            app:layout_constraintRight_toRightOf="@+id/select_disc"
+            android:layout_marginRight="10dp"
+            android:text="Table 007"
+            android:gravity="center"
+    />
+    
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/disconnection"
+            app:layout_constraintLeft_toLeftOf="@+id/select_disc"
+            app:layout_constraintRight_toRightOf="@+id/select_disc"
+            app:layout_constraintTop_toBottomOf="@+id/select_disc"
+            android:layout_marginTop="24dp"
+            android:text="해제"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/btn_color"
+    />
+
+    
+    
+<!--매칭 않은 인식장치 리스트-->
+<TableLayout
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ncon_arduino"
+        app:layout_constraintLeft_toRightOf="@+id/connect_list"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="64dp"
+        android:layout_marginLeft="64dp"
+>
+
+    <TextView
+            android:layout_width="190dp"
+            android:layout_height="36dp"
+            android:text="미연결 인식장치"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="#543118"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+    />
+
+
+    <TextView
+            android:layout_width="95dp"
+            android:layout_height="32dp"
+            android:text="ADIN 007"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="@drawable/con_table_inline"
+    />
+
+    <TextView
+            android:layout_width="95dp"
+            android:layout_height="32dp"
+            android:text="ADIN 002"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="@drawable/con_table_inline"
+    />
+
+    <TextView
+            android:layout_width="95dp"
+            android:layout_height="32dp"
+            android:text="ADIN 004"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="@drawable/con_table_inline"
+    />
+    <TextView
+            android:layout_width="95dp"
+            android:layout_height="32dp"
+            android:text="ADIN 008"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="@drawable/con_table_inline"
+    />
+
+</TableLayout>
+
+    <!--매칭 않은 테이블 리스트-->
+    <TableLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="64dp"
+            android:layout_marginRight="72dp"
+    >
+
+        <TextView
+                android:layout_width="190dp"
+                android:layout_height="36dp"
+                android:text="미연결 테이블"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="#543118"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+        />
+
+
+        <TextView
+                android:layout_width="95dp"
+                android:layout_height="32dp"
+                android:text="Table 006"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="@drawable/con_table_inline"
+        />
+
+        <TextView
+                android:layout_width="95dp"
+                android:layout_height="32dp"
+                android:text="Table 001"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="@drawable/con_table_inline"
+        />
+
+        <TextView
+                android:layout_width="95dp"
+                android:layout_height="32dp"
+                android:text="Table 005"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="@drawable/con_table_inline"
+        />
+        <TextView
+                android:layout_width="95dp"
+                android:layout_height="32dp"
+                android:text="Table 011"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="@drawable/con_table_inline"
+        />
+
+    </TableLayout>
+
+    <!--연결할 리스트 선택-->
+
+    <TextView
+            android:layout_width="236dp"
+            android:layout_height="44dp"
+            android:id="@+id/select_con"
+            app:layout_constraintTop_toBottomOf="@+id/ncon_arduino"
+            app:layout_constraintLeft_toRightOf="@+id/select_disc"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="88dp"
+            android:background="#EAE7E7"
+            android:text="↔"
+            android:textSize="24sp"
+            android:gravity="center"
+    />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/select_con_arduino"
+            app:layout_constraintTop_toTopOf="@+id/select_con"
+            app:layout_constraintLeft_toLeftOf="@+id/select_con"
+            android:layout_marginLeft="10dp"
+            android:text="ADIN 007"
+            android:gravity="center"
+    />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/select_con_table"
+            app:layout_constraintTop_toTopOf="@+id/select_con"
+            app:layout_constraintRight_toRightOf="@+id/select_con"
+            android:layout_marginRight="10dp"
+            android:text="Table 006"
+            android:gravity="center"
+    />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/con_btn"
+            app:layout_constraintLeft_toLeftOf="@+id/select_con"
+            app:layout_constraintRight_toRightOf="@+id/select_con"
+            app:layout_constraintTop_toBottomOf="@+id/select_con"
+            android:layout_marginTop="24dp"
+            android:text="연결"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/btn_color"
+    />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

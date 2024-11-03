@@ -3,7 +3,8 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="172dp"
                                                    android:layout_height="240dp"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+android:background="@color/white">
 <!--진동벨 인식 시 나타나는 팝업창 레이아웃으로 작성한 화면-->
 
     <ImageView
