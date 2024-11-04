@@ -51,4 +51,21 @@ dependencies {
 
     implementation("org.nanohttpd:nanohttpd:2.3.1")
     implementation("org.nanohttpd:nanohttpd-nanolets:2.3.1")
+
+//레트로핏
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //gson
+    implementation("com.google.code.gson:gson:2.10.1")
+
+
+    //firebase
+    implementation("com.google.firebase:firebase-analytics")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    //Glide : 이미지 쉽게 가져오기
+    implementation("com.github.bumptech.glide:glide:4.13.2")
 }
