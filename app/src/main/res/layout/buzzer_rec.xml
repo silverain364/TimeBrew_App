@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="172dp"
+                                                   android:layout_height="240dp"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+android:background="@color/white">
+<!--진동벨 인식 시 나타나는 팝업창 레이아웃으로 작성한 화면-->
+
+    <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/logo_img"
+            android:src="@drawable/timebrew_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="16dp"
+    />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buzzer_num"
+            app:layout_constraintTop_toBottomOf="@+id/logo_img"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="1번 진동벨"
+            android:textSize="20dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="1"
+    />
+    <!--text 값은 위치 확인을 위해 작성 실제 값은 자바로 받을 예정-->
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tset"
+            android:text="시간설정"
+            app:layout_constraintTop_toBottomOf="@+id/buzzer_num"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+    />
+
+    <TextView
+            android:layout_width="80dp"
+            android:layout_height="32dp"
+            android:id="@+id/buzzer_time_set"
+            app:layout_constraintTop_toBottomOf="@+id/tset"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="4dp"
+            android:background="#D9D9D9"
+            android:text="04:00"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+    />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/buzzer_time_set"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+            android:text="완료"
+            android:backgroundTint="@color/btn_color"
+            android:textColor="@color/black"
+
+    />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
