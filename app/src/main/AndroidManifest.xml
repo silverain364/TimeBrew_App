@@ -20,7 +20,7 @@
 
 
         <activity
-                android:name=".table_settings"
+                android:name=".IntroPage"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,8 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-
+        <activity android:name=".JoinPage" />
+        <activity android:name=".LoginPage" />
+        <activity android:name=".MainPage" />
+        <activity android:name=".MemberInfoPage" />
     </application>
 
 </manifest>
