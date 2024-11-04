@@ -91,6 +91,36 @@ button {
     z-index: 2;
 }
 
+#changeMode-container{
+    top: 15px;
+    left: calc(50vw - 50px);
+    position: absolute;
+}
+
+#changeMode-btn{
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 5%; /* 둥근 버튼 */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 버튼 그림자 */
+    user-select: none;
+    background-color: #bc9d87;
+}
+
+#changeMode-btn:hover{
+    background-color: #704620;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 */
+}
+
+#changeMode-btn:active{
+    background-color: #414b4c;
+}
+
+
 
 .waste-btn {
     margin: 10px;
@@ -118,11 +148,9 @@ button {
     transition: background-color 0.5s ease, transform 0.1s ease; /* 부드러운 전환 */
 }
 
-
-.zoom-btn {
+.floating-btn{
     width: 30px;
     height: 30px;
-    background-color: #6595b8; /* 기본 배경색 */
     border: none;
     border-radius: 20%; /* 둥근 버튼 */
     color: white;
@@ -134,6 +162,26 @@ button {
     user-select: none;
 }
 
+.save-btn{
+    background-color: khaki;
+    font-size: 13px;
+}
+
+.save-btn:hover {
+    background-color: #bcb378; /* 호버 시 색상 변경 */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 */
+}
+
+.save-btn:active {
+    background-color: rgba(188, 134, 83, 0.62); /* 클릭 시 색상 */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자 축소 */
+    transform: scale(0.95); /* 클릭 시 버튼 살짝 축소 */
+}
+
+
+.zoom-btn {
+    background-color: #6595b8; /* 기본 배경색 */
+}
 
 .zoom-btn:hover {
     background-color: #094d50; /* 호버 시 색상 변경 */
