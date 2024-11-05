@@ -19,6 +19,7 @@ public class LoginService {
         auth.signInWithEmailAndPassword(id, pw).addOnCompleteListener(onCompleteListener);
     }
 
-
-
+    public void signOn(String email, String pw, com.google.android.gms.tasks.OnCompleteListener<AuthResult> onCompleteListener){
+        auth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(onCompleteListener);
+    }
 }
