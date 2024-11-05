@@ -4,11 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.t2f4.timebrew.application.LoginService;
+import com.t2f4.timebrew.application.ValidateService;
 
 public class LoginPage extends AppCompatActivity {
+
+    private EditText emailEt, pwEt;
+    private ValidateService validateService;
+    private LoginService loginService;
+    private boolean loginFrag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +27,36 @@ public class LoginPage extends AppCompatActivity {
         TextView signUp_Txt = findViewById(R.id.SignUp_txt);
         Button signInBtn = findViewById(R.id.Login_btn);
 
+        emailEt = findViewById(R.id.login_Id_edt);
+        pwEt = findViewById(R.id.login_Passwd_edt);
+
+        validateService = new ValidateService();
+        loginService = new LoginService();
+
+
         signInBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginPage.this, table_settings.class);
-            startActivity(intent);
+            if(loginFrag) return; //로그인 중일 때 다시 시도 못 하도록 방지
+            loginFrag = true;
+
+            String email = emailEt.getText().toString();
+            String pw = pwEt.getText().toString();
+
+            if(!validateService.validateEmail(email)){
+                Toast.makeText(LoginPage.this, "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT);
+                return;
+            }
+
+            loginService.signIn(email, pw, task -> {
+                if (task.isSuccessful()) { //로그인 성공시
+                    Intent intent = new Intent(LoginPage.this, table_settings.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginPage.this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                }
+
+                loginFrag = false;
+            });
         });
 
         signUp_Txt.setOnClickListener(new View.OnClickListener() {
