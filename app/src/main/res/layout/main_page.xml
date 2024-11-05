@@ -12,17 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <TextView
-                android:id="@+id/Title_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TimeBrew☕"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="25dp"
-                android:layout_margin="45dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
                 android:id="@+id/MainLogo_img"
@@ -44,15 +33,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-                android:id="@+id/Hamburger_Button_img"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/hamburger_button"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="65dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
                 android:layout_width="wrap_content"
