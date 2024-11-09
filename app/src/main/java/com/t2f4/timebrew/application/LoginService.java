@@ -13,7 +13,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.jetbrains.annotations.NotNull;
 
 public class LoginService {
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseAuth auth;
+
+    public LoginService(FirebaseAuth auth) {
+        this.auth = auth;
+    }
+
 
     public void signIn(String id, String pw,  com.google.android.gms.tasks.OnCompleteListener<AuthResult> onCompleteListener) {
         auth.signInWithEmailAndPassword(id, pw).addOnCompleteListener(onCompleteListener);

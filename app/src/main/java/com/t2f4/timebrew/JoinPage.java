@@ -5,6 +5,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.application.LoginService;
 import com.t2f4.timebrew.application.ValidateService;
 import com.t2f4.timebrew.dto.UserDto;
@@ -42,7 +43,7 @@ public class JoinPage extends AppCompatActivity {
 
 
         signUpBtn = findViewById(R.id.SignUp_register_btn);
-        loginService = new LoginService();
+        loginService = new LoginService(FirebaseAuth.getInstance());
 
 
         signUpBtn.setOnClickListener(v -> {
@@ -65,7 +66,7 @@ public class JoinPage extends AppCompatActivity {
             }
 
             if(validateService.validateEmail(email)){ //email 검증
-
+                return;
             }
 
             if(validateService.validatePhone(phone)){ //phone 검증
@@ -77,7 +78,7 @@ public class JoinPage extends AppCompatActivity {
                     String uid = task.getResult().getUser().getUid();
                     UserDto userDto = new UserDto(uid, email, memberName, cafeName, phone);
 
-                    //서버로 회원 정보를 보냄
+                    //Todo. 서버로 회원 정보를 보냄
                 }
             });
         });

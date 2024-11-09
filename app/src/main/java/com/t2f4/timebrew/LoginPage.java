@@ -9,11 +9,12 @@ import android.widget.TextView;
 
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.application.LoginService;
 import com.t2f4.timebrew.application.ValidateService;
 
 public class LoginPage extends AppCompatActivity {
-
+    public static boolean TEST = true;
     private EditText emailEt, pwEt;
     private ValidateService validateService;
     private LoginService loginService;
@@ -31,10 +32,16 @@ public class LoginPage extends AppCompatActivity {
         pwEt = findViewById(R.id.login_Passwd_edt);
 
         validateService = new ValidateService();
-        loginService = new LoginService();
+        loginService = new LoginService(FirebaseAuth.getInstance());
 
 
         signInBtn.setOnClickListener(view -> {
+            //임시코드
+            if(TEST) {
+                Intent i = new Intent(LoginPage.this, table_settings.class);
+                startActivity(i);
+                return;
+            }
             if(loginFrag) return; //로그인 중일 때 다시 시도 못 하도록 방지
             loginFrag = true;
 
@@ -67,5 +74,6 @@ public class LoginPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }
