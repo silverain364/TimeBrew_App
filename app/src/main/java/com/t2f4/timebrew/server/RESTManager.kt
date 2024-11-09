@@ -1,5 +1,7 @@
 package com.t2f4.timebrew.server
 
+import com.t2f4.timebrew.server.controller.TableSetController
+import com.t2f4.timebrew.server.controller.TableTimeController
 import fi.iki.elonen.router.RouterNanoHTTPD
 
 //싱글톤
@@ -18,9 +20,8 @@ class RESTManager(private val port: Int): RouterNanoHTTPD(port) {
     }
 
     init {
-        //URL 등록
+        addRoute("/time", TableTimeController::class.java)
+        addRoute("/msg", TableSetController::class.java)
     }
-
-
 
 }
