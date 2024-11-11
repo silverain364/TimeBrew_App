@@ -146,25 +146,17 @@ public class TableSettingFragment extends Fragment {
         Button dlg_ok_btn = dialog.findViewById(R.id.dlg_ok_btn);
         Button dlg_cancle_btn = dialog.findViewById(R.id.dlg_cancle_btn);
 
-        dlg_ok_btn.setOnTouchListener(new View.OnTouchListener() {
+        dlg_ok_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    dialog.dismiss();  // 다이얼로그 닫기
-                    v.performClick();  // 경고 해결을 위해 performClick 호출
-                }
-                return true;
+            public void onClick(View v) {
+                dialog.dismiss();  // 다이얼로그 닫기
             }
         });
 
-        dlg_cancle_btn.setOnTouchListener(new View.OnTouchListener() {
+        dlg_cancle_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    dialog.dismiss();  // 다이얼로그 닫기
-                    v.performClick();  // 경고 해결을 위해 performClick 호출
-                }
-                return true;
+            public void onClick(View v) {
+                dialog.dismiss();  // 다이얼로그 닫기
             }
         });
 
