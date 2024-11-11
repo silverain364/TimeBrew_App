@@ -19,7 +19,7 @@ public class LoginPage extends AppCompatActivity {
         Button signInBtn = findViewById(R.id.Login_btn);
 
         signInBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginPage.this, table_settings.class);
+            Intent intent = new Intent(LoginPage.this, Table_settings.class);
             startActivity(intent);
         });
 
