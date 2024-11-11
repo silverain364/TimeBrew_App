@@ -17,7 +17,7 @@ public class IntroPage extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(IntroPage.this, LoginPage.class);
+                Intent intent = new Intent(IntroPage.this, TemplatePage.class);
                 startActivity(intent);
                 finish(); // IntroPage를 종료해서 뒤로가기 시 다시 표시되지 않게 함
             }

@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 
 public class TemplatePage extends AppCompatActivity {
@@ -31,9 +30,14 @@ public class TemplatePage extends AppCompatActivity {
             }
         });
 
+
+
         // `MainPageFragment`를 `frameLayoutContainer`에 추가
+
+
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayoutContainer, new MainPage())
+                .replace(R.id.frameLayoutContainer, new TableSettingFragment())  //new MainFragment())
                 .commit();
+
     }
 }

@@ -11,7 +11,7 @@ tables.forEach(table => {
     })
 })
 
-function getTableN  umbers(){
+function getTableNumbers(){
     console.log(tables.map(table => table.dataset.tableId));
     return tables.map(table => table.dataset.tableId);
 }

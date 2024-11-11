@@ -34,7 +34,6 @@ public class JoinPage extends AppCompatActivity {
 
         // Et 요소들을 Java 변수에 할당
         emailEt = findViewById(R.id.SignUp_Email_edt);
-        idEt = findViewById(R.id.SignUp_Id_edt);
         pwEt = findViewById(R.id.SignUp_Passwd_edt);
         pwAgainEt = findViewById(R.id.SignUp_PasswdAgain_edt);
         memberNameEt = findViewById(R.id.SignUp_MemberName_edt);
@@ -44,6 +43,7 @@ public class JoinPage extends AppCompatActivity {
 
         signUpBtn = findViewById(R.id.SignUp_register_btn);
         loginService = new LoginService(FirebaseAuth.getInstance());
+        validateService = new ValidateService();
 
 
         signUpBtn.setOnClickListener(v -> {

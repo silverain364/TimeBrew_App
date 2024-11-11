@@ -10,4 +10,5 @@ public class ValidateService {
     public boolean validatePhone(String phone){
         return Patterns.PHONE.matcher(phone).matches();
     }
+
 }

@@ -38,7 +38,7 @@ public class LoginPage extends AppCompatActivity {
         signInBtn.setOnClickListener(view -> {
             //임시코드
             if(TEST) {
-                Intent i = new Intent(LoginPage.this, table_settings.class);
+                Intent i = new Intent(LoginPage.this, TableSettingFragment.class);
                 startActivity(i);
                 return;
             }
@@ -55,7 +55,7 @@ public class LoginPage extends AppCompatActivity {
 
             loginService.signIn(email, pw, task -> {
                 if (task.isSuccessful()) { //로그인 성공시
-                    Intent intent = new Intent(LoginPage.this, table_settings.class);
+                    Intent intent = new Intent(LoginPage.this, TableSettingFragment.class);
                     startActivity(intent);
                     finish();
                 } else {
