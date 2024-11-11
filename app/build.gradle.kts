@@ -17,6 +17,14 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    dependencies {
+        val fragment_version = "1.8.3"
+
+        // Java language implementation
+        implementation("androidx.fragment:fragment:$fragment_version")
+        // Kotlin
+        implementation("androidx.fragment:fragment-ktx:$fragment_version")
+    }
 
     buildTypes {
         release {

@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginPage">
 
-    <TextView
-        android:id="@+id/Title_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TimeBrew☕"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:layout_margin="45dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/Logo_img"
@@ -33,7 +22,7 @@
         android:id="@+id/login_Id_edt"
         android:layout_width="500dp"
         android:layout_height="65dp"
-        android:hint="아이디"
+        android:hint="이메일"
         android:paddingStart="25dp"
         android:background="@drawable/solid_edittext"
         android:textStyle="bold"
@@ -85,9 +74,9 @@
         android:id="@+id/FindIdPs_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디/비밀번호 찾기"
+        android:text="비밀번호 찾기"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="220dp"
+        android:layout_marginLeft="200dp"
         android:textColor="#8F8F8F"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/Login_btn"

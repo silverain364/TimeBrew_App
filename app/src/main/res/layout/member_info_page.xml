@@ -41,6 +41,7 @@
         <TextView
                 android:layout_width="580dp"
                 android:layout_height="65dp"
+                android:layout_marginTop="5dp"
                 android:paddingTop="15dp"
                 android:text="사업자 이름"
                 android:paddingStart="25dp"
@@ -49,7 +50,7 @@
 
         <TextView
                 android:id="@+id/member_info_name_txt"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="370dp"
                 android:layout_height="55dp"
                 android:paddingTop="10dp"
