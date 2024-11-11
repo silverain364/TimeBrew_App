@@ -25,7 +25,6 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
-
         TextView signUp_Txt = findViewById(R.id.SignUp_txt);
         Button signInBtn = findViewById(R.id.Login_btn);
 
@@ -75,6 +74,5 @@ public class LoginPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }
