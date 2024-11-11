@@ -30,9 +30,11 @@
         </activity>
         <activity android:name=".JoinPage" />
         <activity android:name=".LoginPage" />
-        <activity android:name=".MainPage" />
+        <activity android:name=".MainFragment" />
         <activity android:name=".MemberInfoPage" />
-        <activity android:name=".table_settings" />
+        <activity android:name=".TableSettingFragment" />
+        <activity android:name=".ArduinoPage" />
+        <activity android:name=".TemplatePage" />
     </application>
 
 </manifest>

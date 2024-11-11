@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.499"/>
 
     <EditText
-        android:id="@+id/Login_Id_edt"
+        android:id="@+id/login_Id_edt"
         android:layout_width="500dp"
         android:layout_height="65dp"
         android:hint="이메일"
@@ -34,7 +34,7 @@
         />
 
     <EditText
-        android:id="@+id/Login_Passwd_edt"
+        android:id="@+id/login_Passwd_edt"
         android:layout_width="500dp"
         android:layout_height="65dp"
         android:hint="비밀번호"
@@ -43,7 +43,7 @@
         android:textStyle="bold"
         android:textColor="#8A8A8A"
         android:layout_margin="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/Login_Id_edt"
+        app:layout_constraintTop_toBottomOf="@+id/login_Id_edt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
     <Button
@@ -54,7 +54,7 @@
         android:background="@drawable/solid_button"
         android:layout_margin="70dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/Login_Passwd_edt"
+        app:layout_constraintTop_toBottomOf="@+id/login_Passwd_edt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
