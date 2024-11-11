@@ -28,6 +28,8 @@ public class TableSettingFragment extends Fragment {
     private Button table_check;
     private List<Integer> tableNumberList = new ArrayList<>();
 
+    private Button arduino_check;
+
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
@@ -36,6 +38,8 @@ public class TableSettingFragment extends Fragment {
 
         table_set = root.findViewById(R.id.table_set);
         table_check = root.findViewById(R.id.table_check);
+        arduino_check = root.findViewById(R.id.arduino_check);
+
 
 
 //      웹뷰의 설정을 통해 JS 사용을 허용하도록 변경
@@ -88,6 +92,15 @@ public class TableSettingFragment extends Fragment {
             }
         });
 
+        arduino_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showBuzzerPopup();
+            }
+        });
+
+
+
         return root;
     }
 
@@ -130,6 +143,18 @@ public class TableSettingFragment extends Fragment {
         });
 
         dialog.show();
+    }
+
+    private void showBuzzerPopup(){
+        Dialog dialog2 = new Dialog(getContext());
+        dialog2.setContentView(R.layout.buzzer_rec);
+
+        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.16);
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.37);
+        dialog2.getWindow().setLayout(width, height);
+
+        dialog2.show();
+
     }
 
     // customDialog 표시 메서드

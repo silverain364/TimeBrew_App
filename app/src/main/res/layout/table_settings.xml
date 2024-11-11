@@ -34,8 +34,8 @@
 <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/aduino_check"
-        android:text="테이블 확인"
+        android:id="@+id/arduino_check"
+        android:text="인식 확인"
         android:textStyle="bold"
         android:backgroundTint="@color/btn_color"
         app:layout_constraintRight_toRightOf="parent"
