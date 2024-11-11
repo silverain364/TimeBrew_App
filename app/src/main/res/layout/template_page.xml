@@ -62,5 +62,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:background="#FFFFFF"
-            app:menu="@menu/drawer_menu" />
+            app:menu="@menu/drawer_menu" />  <!-- 메뉴 연결 -->
+
 </androidx.drawerlayout.widget.DrawerLayout>

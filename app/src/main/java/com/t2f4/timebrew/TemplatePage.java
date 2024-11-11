@@ -1,8 +1,11 @@
 package com.t2f4.timebrew;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
@@ -30,7 +33,24 @@ public class TemplatePage extends AppCompatActivity {
                 }
             }
         });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // if-else로 변경
+                if (item.getItemId() == R.id.nav_first) {
+                    Toast.makeText(TemplatePage.this, "First Item clicked", Toast.LENGTH_SHORT).show();
+                } else if (item.getItemId() == R.id.nav_second) {
+                    Toast.makeText(TemplatePage.this, "Second Item clicked", Toast.LENGTH_SHORT).show();
+                } else if (item.getItemId() == R.id.nav_third) {
+                    Toast.makeText(TemplatePage.this, "Third Item clicked", Toast.LENGTH_SHORT).show();
+                }
 
+                // Drawer 닫기
+                drawerLayout.closeDrawer(navigationView);
+                return true;
+            }
+        });
+        ;
         // `MainPageFragment`를 `frameLayoutContainer`에 추가
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayoutContainer, new MainPage())
