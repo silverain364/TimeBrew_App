@@ -33,6 +33,7 @@
         <activity android:name=".MainPage" />
         <activity android:name=".MemberInfoPage" />
         <activity android:name=".table_settings" />
+        <activity android:name=".ArduinoPage" />
     </application>
 
 </manifest>

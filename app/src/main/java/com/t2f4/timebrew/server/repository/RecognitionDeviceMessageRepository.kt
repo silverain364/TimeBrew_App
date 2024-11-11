@@ -13,8 +13,9 @@ class RecognitionDeviceMessageRepository {
         return recognitionDeviceStore[recognitionDeviceId];
     }
 
-    fun insert(recognitionDeviceId: String) {
+    fun save(recognitionDeviceId: String): Queue<String>? {
         recognitionDeviceStore[recognitionDeviceId] = LinkedList()
+        return recognitionDeviceStore[recognitionDeviceId]
     }
 
     fun delete(recognitionDeviceId: String){

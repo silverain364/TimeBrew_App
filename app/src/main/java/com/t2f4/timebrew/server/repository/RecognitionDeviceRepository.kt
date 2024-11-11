@@ -12,8 +12,13 @@ class RecognitionDeviceRepository {
         return recognitionDeviceStore[recognitionDeviceId]
     }
 
-    fun update(recognitionDeviceDto: RecognitionDeviceDto): RecognitionDeviceDto?{
-        recognitionDeviceStore[recognitionDeviceDto.recognitionDeviceId] = recognitionDeviceDto
-        return  recognitionDeviceDto;
+    fun findAll(): List<RecognitionDeviceDto>{
+        return recognitionDeviceStore.values.toList();
+    }
+
+
+    fun save(recognitionDeviceDto: RecognitionDeviceDto): RecognitionDeviceDto? {
+        recognitionDeviceStore[recognitionDeviceDto.recognitionDeviceId] = recognitionDeviceDto;
+        return recognitionDeviceStore[recognitionDeviceDto.recognitionDeviceId];
     }
 }
