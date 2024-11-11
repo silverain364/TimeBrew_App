@@ -15,7 +15,6 @@
         android:src="@drawable/timebrew_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="12dp"
 
 />
 
