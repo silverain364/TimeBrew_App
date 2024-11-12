@@ -45,7 +45,7 @@
                 android:paddingTop="15dp"
                 android:text="사업자 이름"
                 android:paddingStart="25dp"
-                android:background="@drawable/solid_edittext_signup_accept"
+                android:background="@drawable/solid_textview_member_info"
                 android:textSize="20sp" />
 
         <TextView
@@ -66,7 +66,7 @@
                 android:paddingTop="15dp"
                 android:text="카페명"
                 android:paddingStart="25dp"
-                android:background="@drawable/solid_edittext_signup_accept"
+                android:background="@drawable/solid_textview_member_info"
                 android:textSize="20sp" />
 
         <TextView
@@ -88,7 +88,7 @@
                 android:paddingTop="15dp"
                 android:text="이메일"
                 android:paddingStart="25dp"
-                android:background="@drawable/solid_edittext_signup_accept"
+                android:background="@drawable/solid_textview_member_info"
                 android:textSize="20sp" />
         <TextView
                 android:id="@+id/member_info_email_txt"
@@ -109,7 +109,7 @@
                 android:paddingTop="15dp"
                 android:text="아이디"
                 android:paddingStart="25dp"
-                android:background="@drawable/solid_edittext_signup_accept"
+                android:background="@drawable/solid_textview_member_info"
                 android:textSize="20sp" />
 
         <TextView
@@ -130,7 +130,7 @@
                 android:paddingTop="15dp"
                 android:text="전화번호"
                 android:paddingStart="25dp"
-                android:background="@drawable/solid_edittext_signup_accept"
+                android:background="@drawable/solid_textview_member_info"
                 android:textSize="20sp" />
 
         <TextView

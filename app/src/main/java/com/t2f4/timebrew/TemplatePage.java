@@ -1,8 +1,12 @@
 package com.t2f4.timebrew;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
@@ -33,15 +37,16 @@ public class TemplatePage extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // if-else로 변경
-                if (item.getItemId() == R.id.nav_first) {
-                    Toast.makeText(TemplatePage.this, "First Item clicked", Toast.LENGTH_SHORT).show();
-                } else if (item.getItemId() == R.id.nav_second) {
-                    Toast.makeText(TemplatePage.this, "Second Item clicked", Toast.LENGTH_SHORT).show();
-                } else if (item.getItemId() == R.id.nav_third) {
-                    Toast.makeText(TemplatePage.this, "Third Item clicked", Toast.LENGTH_SHORT).show();
+                if (item.getItemId() == R.id.nav_member_info_page) {
+                    Intent intent = new Intent(TemplatePage.this, MemberInfoPage.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.nav_table_settings_page) {
+                    Intent intent = new Intent(TemplatePage.this, TableSettingFragment.class);
+                    startActivity(intent);
+                } else if (item.getItemId() == R.id.nav_arduino_page) {
+                    Intent intent = new Intent(TemplatePage.this, ArduinoPage.class);
+                    startActivity(intent);
                 }
-
                 // Drawer 닫기
                 drawerLayout.closeDrawer(navigationView);
                 return true;
@@ -50,7 +55,7 @@ public class TemplatePage extends AppCompatActivity {
         ;
         // `MainPageFragment`를 `frameLayoutContainer`에 추가
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameLayoutContainer, new MainPage())
+                .replace(R.id.frameLayoutContainer, new MainFragment())
                 .commit();
     }
 }

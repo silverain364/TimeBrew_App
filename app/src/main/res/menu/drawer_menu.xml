@@ -2,15 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/nav_first"
-            android:title="First Item" />
+            android:id="@+id/nav_app_info"
+            android:title="아잇코님! \n지금은 커피를 즐길 시간"
+            android:enabled="false" />
 
     <item
-            android:id="@+id/nav_second"
-            android:title="Second Item" />
+            android:id="@+id/nav_member_info_page"
+            android:title="관리자 페이지" />
 
     <item
-            android:id="@+id/nav_third"
-            android:title="Third Item" />
+            android:id="@+id/nav_table_settings_page"
+            android:title="테이블 관리" />
+
+    <item
+            android:id="@+id/nav_arduino_page"
+            android:title="장치ID 부여" />
 
 </menu>

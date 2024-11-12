@@ -34,7 +34,9 @@
         <activity android:name=".MemberInfoPage" />
         <activity android:name=".TableSettingFragment" />
         <activity android:name=".ArduinoPage" />
+        <activity android:name=".FindPasswordPage" />
         <activity android:name=".TemplatePage" />
+
     </application>
 
 </manifest>
