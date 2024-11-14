@@ -15,6 +15,12 @@ import com.google.android.material.navigation.NavigationView;
 public class TemplatePage extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
+    private FragmentManager fragmentManager;
+    private TableSettingFragment tableSettingFragment;
+    private MemberInfoPage memberInfoPage;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +29,10 @@ public class TemplatePage extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         ImageButton hamburgerButton = findViewById(R.id.Hamburger_Button_img);  // 햄버거 버튼 ID 맞추기
         NavigationView navigationView = findViewById(R.id.navigationView);
+
+        fragmentManager = getSupportFragmentManager();
+        tableSettingFragment = new TableSettingFragment();
+        memberInfoPage = new MemberInfoPage();
 
         hamburgerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,11 +48,15 @@ public class TemplatePage extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.nav_member_info_page) {
-                    Intent intent = new Intent(TemplatePage.this, MemberInfoPage.class);
-                    startActivity(intent);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frameLayoutContainer, memberInfoPage) // fragment_container는 Fragment를 표시할 레이아웃 ID입니다.
+                            .addToBackStack(null) // 뒤로 가기 버튼을 누르면 이전 Fragment로 돌아가도록 설정
+                            .commit();
                 } else if (item.getItemId() == R.id.nav_table_settings_page) {
-                    Intent intent = new Intent(TemplatePage.this, TableSettingFragment.class);
-                    startActivity(intent);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frameLayoutContainer, tableSettingFragment) // fragment_container는 Fragment를 표시할 레이아웃 ID입니다.
+                            .addToBackStack(null) // 뒤로 가기 버튼을 누르면 이전 Fragment로 돌아가도록 설정
+                            .commit();
                 } else if (item.getItemId() == R.id.nav_arduino_page) {
                     Intent intent = new Intent(TemplatePage.this, ArduinoPage.class);
                     startActivity(intent);
