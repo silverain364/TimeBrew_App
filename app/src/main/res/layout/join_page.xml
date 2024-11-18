@@ -121,7 +121,6 @@
                 android:text="등  록"
                 android:background="@drawable/solid_button"
                 android:layout_margin="60dp"
-                android:layout_marginBottom="60dp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/SignUp_CafeName_edt"
                 app:layout_constraintLeft_toLeftOf="parent"

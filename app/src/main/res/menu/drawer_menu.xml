@@ -1,9 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-            android:id="@+id/nav_item_one"
-            android:title="Item 1"/>
+            android:id="@+id/nav_app_info"
+            android:title="아잇코님! 지금은 커피를 즐길 시간"
+            android:enabled="false" />
     <item
-            android:id="@+id/nav_item_two"
-            android:title="Item 2"/>
-    <!-- 추가 아이템 -->
+            android:id="@+id/nav_view"
+            android:title=" "
+            android:enabled="false" />
+
+    <item
+            android:id="@+id/nav_member_info_page"
+            android:title="관리자 페이지" />
+
+    <item
+            android:id="@+id/nav_table_settings_page"
+            android:title="테이블 관리" />
+
+    <item
+            android:id="@+id/nav_arduino_page"
+            android:title="장치ID 부여" />
+
 </menu>

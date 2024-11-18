@@ -26,6 +26,7 @@ public class LoginPage extends AppCompatActivity {
         setContentView(R.layout.login_page);
 
         TextView signUp_Txt = findViewById(R.id.SignUp_txt);
+        TextView FindPs_txt = findViewById(R.id.FindPs_txt);
         Button signInBtn = findViewById(R.id.Login_btn);
 
         emailEt = findViewById(R.id.login_Id_edt);
@@ -38,7 +39,7 @@ public class LoginPage extends AppCompatActivity {
         signInBtn.setOnClickListener(view -> {
             //임시코드
             if(TEST) {
-                Intent i = new Intent(LoginPage.this, TableSettingFragment.class);
+                Intent i = new Intent(LoginPage.this, TemplatePage.class);
                 startActivity(i);
                 return;
             }
@@ -74,5 +75,14 @@ public class LoginPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        FindPs_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent를 사용하여 FindPasswordPage 액티비티로 이동
+                Intent intent = new Intent(LoginPage.this, FindPasswordPage.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

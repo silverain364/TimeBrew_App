@@ -43,7 +43,6 @@ public class TableSettingFragment extends Fragment {
         table_check = root.findViewById(R.id.table_check);
         arduino_check = root.findViewById(R.id.arduino_check);
 
-
 //      웹뷰의 설정을 통해 JS 사용을 허용하도록 변경
         WebSettings settings = table_set.getSettings();
         settings.setJavaScriptEnabled(true);
