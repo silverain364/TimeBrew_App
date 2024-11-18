@@ -20,7 +20,7 @@
 
 
         <activity
-                android:name=".IntroPage"
+                android:name=".ArduinoPage"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -33,7 +33,7 @@
         <activity android:name=".MainFragment" />
         <activity android:name=".MemberInfoPage" />
         <activity android:name=".TableSettingFragment" />
-        <activity android:name=".ArduinoPage" />
+<!--        <activity android:name=".ArduinoPage" />-->
         <activity android:name=".TemplatePage" />
     </application>
 

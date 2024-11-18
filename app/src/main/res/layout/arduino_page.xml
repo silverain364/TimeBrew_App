@@ -21,21 +21,21 @@
 
 <!--매칭 완료 된 테이블과 아두이노 리스트-->
     <TableLayout
-            android:layout_width="190dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:id="@+id/connect_list"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="72dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="100dp"
             android:stretchColumns="*"
             android:background="@drawable/con_table_outline">
 
         <TextView
-                android:layout_width="190dp"
-                android:layout_height="36dp"
+                android:layout_width="400dp"
+                android:layout_height="60dp"
                 android:text="연결 완료 리스트"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="#543118"
                 android:textColor="@color/white"
@@ -46,18 +46,18 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:layout_width="95dp"
-                    android:layout_height="32dp"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     android:text="ADIN 005"
-                    android:textSize="18sp"
+                    android:textSize="28sp"
                     android:gravity="center"
                     android:background="@drawable/con_table_inline"
             />
             <TextView
-                    android:layout_width="95dp"
-                    android:layout_height="32dp"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     android:text="Table 003"
-                    android:textSize="18sp"
+                    android:textSize="28sp"
                     android:gravity="center"
                     android:background="@drawable/con_table_inline"
 
@@ -70,18 +70,18 @@
                 android:background="#F0F0F0">
 
             <TextView
-                    android:layout_width="95dp"
-                    android:layout_height="32dp"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     android:text="ADIN 009"
-                    android:textSize="18sp"
+                    android:textSize="28sp"
                     android:gravity="center"
                     android:background="@drawable/con_table_inline"
             />
             <TextView
-                    android:layout_width="95dp"
-                    android:layout_height="32dp"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     android:text="Table 007"
-                    android:textSize="18sp"
+                    android:textSize="28sp"
                     android:gravity="center"
                     android:background="@drawable/con_table_inline"
 
@@ -92,18 +92,18 @@
             android:layout_height="match_parent">
 
         <TextView
-                android:layout_width="95dp"
-                android:layout_height="32dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:text="ADIN 001"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="@drawable/con_table_inline"
         />
         <TextView
-                android:layout_width="95dp"
-                android:layout_height="32dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:text="Table 010"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="@drawable/con_table_inline"
 
@@ -117,16 +117,16 @@
                 android:background="#F0F0F0">
 
             <TextView
-                    android:layout_width="95dp"
-                    android:layout_height="32dp"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     android:text=""
                     android:textSize="18sp"
                     android:gravity="center"
                     android:background="@drawable/con_table_inline"
             />
             <TextView
-                    android:layout_width="95dp"
-                    android:layout_height="32dp"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
                     android:text=""
                     android:textSize="18sp"
                     android:gravity="center"
@@ -134,32 +134,59 @@
             />
 
         </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF">
+
+            <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+            />
+            <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:background="@drawable/con_table_inline"
+            />
+
+        </TableRow>
+
     </TableLayout>
 
 <!--해제할 연결 리스트 선택-->
+
     <TextView
-            android:layout_width="236dp"
-            android:layout_height="44dp"
+            android:layout_width="404dp"
+            android:layout_height="80dp"
             android:id="@+id/select_disc"
             app:layout_constraintTop_toBottomOf="@+id/connect_list"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="32dp"
-            android:layout_marginLeft="48dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="72dp"
             android:background="#EAE7E7"
             android:text="—"
-            android:textSize="24sp"
+            android:textSize="48sp"
             android:gravity="center"
     />
-
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/disc_arduino"
             app:layout_constraintTop_toTopOf="@+id/select_disc"
             app:layout_constraintLeft_toLeftOf="@+id/select_disc"
+            android:textSize="28sp"
             android:layout_marginLeft="10dp"
             android:text="ADIN 009"
             android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingHorizontal="16dp"
     />
 
     <EditText
@@ -169,8 +196,12 @@
             app:layout_constraintTop_toTopOf="@+id/select_disc"
             app:layout_constraintRight_toRightOf="@+id/select_disc"
             android:layout_marginRight="10dp"
+            android:textSize="28sp"
             android:text="Table 007"
             android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingHorizontal="16dp"
+
     />
     
     <Button
@@ -180,31 +211,35 @@
             app:layout_constraintLeft_toLeftOf="@+id/select_disc"
             app:layout_constraintRight_toRightOf="@+id/select_disc"
             app:layout_constraintTop_toBottomOf="@+id/select_disc"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:text="해제"
+            android:textSize="32sp"
             android:textStyle="bold"
+            android:gravity="center"
             android:textColor="@color/black"
             android:backgroundTint="@color/btn_color"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="32dp"
     />
 
     
     
 <!--매칭 않은 인식장치 리스트-->
 <TableLayout
-        android:layout_width="160dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:id="@+id/ncon_arduino"
         app:layout_constraintLeft_toRightOf="@+id/connect_list"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="64dp"
-        android:layout_marginLeft="64dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="80dp"
 >
 
     <TextView
-            android:layout_width="190dp"
-            android:layout_height="36dp"
+            android:layout_width="400dp"
+            android:layout_height="60dp"
             android:text="미연결 인식장치"
-            android:textSize="18sp"
+            android:textSize="28sp"
             android:gravity="center"
             android:background="#543118"
             android:textColor="@color/white"
@@ -213,57 +248,65 @@
 
 
     <TextView
-            android:layout_width="95dp"
-            android:layout_height="32dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
             android:text="ADIN 007"
-            android:textSize="18sp"
+            android:textSize="28sp"
             android:gravity="center"
             android:background="@drawable/con_table_inline"
     />
 
     <TextView
-            android:layout_width="95dp"
-            android:layout_height="32dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
             android:text="ADIN 002"
-            android:textSize="18sp"
+            android:textSize="28sp"
             android:gravity="center"
             android:background="@drawable/con_table_inline"
     />
 
     <TextView
-            android:layout_width="95dp"
-            android:layout_height="32dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
             android:text="ADIN 004"
-            android:textSize="18sp"
+            android:textSize="28sp"
             android:gravity="center"
             android:background="@drawable/con_table_inline"
     />
     <TextView
-            android:layout_width="95dp"
-            android:layout_height="32dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
             android:text="ADIN 008"
-            android:textSize="18sp"
+            android:textSize="28sp"
             android:gravity="center"
             android:background="@drawable/con_table_inline"
     />
 
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="ADIN 012"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:background="@drawable/con_table_inline"
+    />
 </TableLayout>
 
     <!--매칭 않은 테이블 리스트-->
     <TableLayout
-            android:layout_width="160dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="100dp"
             android:layout_marginRight="72dp"
     >
 
         <TextView
-                android:layout_width="190dp"
-                android:layout_height="36dp"
+                android:layout_width="400dp"
+                android:layout_height="60dp"
                 android:text="미연결 테이블"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="#543118"
                 android:textColor="@color/white"
@@ -272,36 +315,44 @@
 
 
         <TextView
-                android:layout_width="95dp"
-                android:layout_height="32dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:text="Table 006"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="@drawable/con_table_inline"
         />
 
         <TextView
-                android:layout_width="95dp"
-                android:layout_height="32dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:text="Table 001"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="@drawable/con_table_inline"
         />
 
         <TextView
-                android:layout_width="95dp"
-                android:layout_height="32dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:text="Table 005"
-                android:textSize="18sp"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="@drawable/con_table_inline"
         />
         <TextView
-                android:layout_width="95dp"
-                android:layout_height="32dp"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
                 android:text="Table 011"
-                android:textSize="18sp"
+                android:textSize="28sp"
+                android:gravity="center"
+                android:background="@drawable/con_table_inline"
+        />
+        <TextView
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:text="Table 013"
+                android:textSize="28sp"
                 android:gravity="center"
                 android:background="@drawable/con_table_inline"
         />
@@ -311,16 +362,16 @@
     <!--연결할 리스트 선택-->
 
     <TextView
-            android:layout_width="236dp"
-            android:layout_height="44dp"
+            android:layout_width="404dp"
+            android:layout_height="80dp"
             android:id="@+id/select_con"
             app:layout_constraintTop_toBottomOf="@+id/ncon_arduino"
             app:layout_constraintLeft_toRightOf="@+id/select_disc"
-            android:layout_marginTop="32dp"
-            android:layout_marginLeft="88dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="192dp"
             android:background="#EAE7E7"
             android:text="↔"
-            android:textSize="24sp"
+            android:textSize="48sp"
             android:gravity="center"
     />
 
@@ -331,8 +382,13 @@
             app:layout_constraintTop_toTopOf="@+id/select_con"
             app:layout_constraintLeft_toLeftOf="@+id/select_con"
             android:layout_marginLeft="10dp"
+            android:textSize="28sp"
             android:text="ADIN 007"
             android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingHorizontal="16dp"
+
+
     />
 
     <EditText
@@ -342,8 +398,13 @@
             app:layout_constraintTop_toTopOf="@+id/select_con"
             app:layout_constraintRight_toRightOf="@+id/select_con"
             android:layout_marginRight="10dp"
+            android:textSize="28sp"
             android:text="Table 006"
             android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingHorizontal="16dp"
+
+
     />
 
     <Button
@@ -353,11 +414,14 @@
             app:layout_constraintLeft_toLeftOf="@+id/select_con"
             app:layout_constraintRight_toRightOf="@+id/select_con"
             app:layout_constraintTop_toBottomOf="@+id/select_con"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
+            android:textSize="32sp"
             android:text="연결"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:backgroundTint="@color/btn_color"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="32dp"
     />
 
 
