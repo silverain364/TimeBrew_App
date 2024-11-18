@@ -1,5 +1,6 @@
 package com.t2f4.timebrew.server.controller
 
+import android.util.Log
 import com.t2f4.timebrew.server.dto.RecognitionDeviceDto
 import com.t2f4.timebrew.server.repository.RecognitionDeviceMessageRepository
 import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository
@@ -17,6 +18,7 @@ class TableSetController: RouterNanoHTTPD.GeneralHandler() {
         session: NanoHTTPD.IHTTPSession?
     ): NanoHTTPD.Response {
         //Todo. Setting 구현 및 등록 구현
+        Log.d("http", "msg : " + session?.remoteIpAddress);
 
         //인식장치 id 받기
         val recognitionDeviceId = urlParams?.get("id")

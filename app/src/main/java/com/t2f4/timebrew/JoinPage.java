@@ -16,7 +16,6 @@ import java.util.List;
 
 public class JoinPage extends AppCompatActivity {
     private EditText emailEt;
-    private EditText idEt;
     private EditText pwEt;
     private EditText pwAgainEt;
     private EditText memberNameEt;
@@ -48,14 +47,13 @@ public class JoinPage extends AppCompatActivity {
 
         signUpBtn.setOnClickListener(v -> {
             String email = emailEt.getText().toString();
-            String id = idEt.getText().toString();
             String pw = pwEt.getText().toString();
             String pwAgain = pwAgainEt.getText().toString();
             String memberName = memberNameEt.getText().toString();
             String phone = phoneEt.getText().toString();
             String cafeName = cafeNameEt.getText().toString();
 
-            List<String> inputList = Arrays.asList(email, id, pw, pwAgain, memberName, phone, cafeName);
+            List<String> inputList = Arrays.asList(email, pw, pwAgain, memberName, phone, cafeName);
 
             if(inputList.stream().anyMatch(String::isEmpty)){ //공백이 있는 경우
                 return;

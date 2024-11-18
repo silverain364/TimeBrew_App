@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import com.t2f4.timebrew.server.RESTManager;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +36,8 @@ public class TableSettingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.table_settings, container, false);
+
+        RESTManager.context = getActivity();
 
         table_set = root.findViewById(R.id.table_set);
         table_check = root.findViewById(R.id.table_check);
@@ -161,7 +164,6 @@ public class TableSettingFragment extends Fragment {
         });
 
         dialog2.show();
-
     }
 
     // customDialog 표시 메서드
