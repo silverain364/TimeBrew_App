@@ -1,5 +1,6 @@
 package com.t2f4.timebrew;
 
+import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,6 +82,9 @@ public class JoinPage extends AppCompatActivity {
                     //Todo. 서버로 회원 정보를 보냄
                 }
             });
+            // Intent를 사용하여 LoginPage 액티비티로 이동
+            Intent intent = new Intent(JoinPage.this, LoginPage.class);
+            startActivity(intent);
         });
     }
 }

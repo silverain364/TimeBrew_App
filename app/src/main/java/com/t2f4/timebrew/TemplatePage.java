@@ -18,6 +18,7 @@ public class TemplatePage extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private TableSettingFragment tableSettingFragment;
     private MemberInfoPage memberInfoPage;
+    private ArduinoPage arduinoPage;
 
 
 
@@ -33,6 +34,8 @@ public class TemplatePage extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         tableSettingFragment = new TableSettingFragment();
         memberInfoPage = new MemberInfoPage();
+        arduinoPage = new ArduinoPage();
+
 
         hamburgerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +61,10 @@ public class TemplatePage extends AppCompatActivity {
                             .addToBackStack(null) // 뒤로 가기 버튼을 누르면 이전 Fragment로 돌아가도록 설정
                             .commit();
                 } else if (item.getItemId() == R.id.nav_arduino_page) {
-                    Intent intent = new Intent(TemplatePage.this, ArduinoPage.class);
-                    startActivity(intent);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frameLayoutContainer, arduinoPage)
+                            .addToBackStack(null)
+                            .commit();
                 }
                 // Drawer 닫기
                 drawerLayout.closeDrawer(navigationView);
