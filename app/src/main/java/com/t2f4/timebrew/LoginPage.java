@@ -43,6 +43,7 @@ public class LoginPage extends AppCompatActivity {
                 startActivity(i);
                 return;
             }
+
             if(loginFrag) return; //로그인 중일 때 다시 시도 못 하도록 방지
             loginFrag = true;
 

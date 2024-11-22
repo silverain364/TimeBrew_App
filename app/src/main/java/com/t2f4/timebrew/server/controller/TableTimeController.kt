@@ -16,7 +16,6 @@ import kotlin.concurrent.thread
 
 class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
 
-
     override fun get( //남은 시간이 얼마나 남았는지 조회할 때 사용
         uriResource: RouterNanoHTTPD.UriResource?,
         urlParams: MutableMap<String, String>?,
