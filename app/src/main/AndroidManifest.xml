@@ -37,7 +37,6 @@
         <activity android:name=".ArduinoPage" />
         <activity android:name=".FindPasswordPage" />
         <activity android:name=".TemplatePage" />
-
     </application>
 
 </manifest>
