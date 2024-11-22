@@ -53,25 +53,7 @@ public class TableSettingFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                view.evaluateJavascript("javascript:getTableNumbers()", value -> {
-                    Log.d("javascript", value.toString());
-                    Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
-
-                    try {
-                        Log.d("javascript", value.toString());
-                        Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
-                        if (value.toString().equals("null")) return;
-
-                        JSONArray jsonArray = new JSONArray(value.toString());
-
-                        for (int i = 0; i < jsonArray.length(); i++)
-                            tableNumberList.add(jsonArray.getInt(i));
-
-                        Log.d("javascript", "convert : " + tableNumberList);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+                view.evaluateJavascript("javascript:loadSettingJs()", null);
             }
         });
 
@@ -79,11 +61,9 @@ public class TableSettingFragment extends Fragment {
         // alert(), confirm() 같은 팝업 기능의 Js 코드 사용 (혹시 몰라 사용 할 수 있도록 코드 작성)
         table_set.setWebChromeClient(new WebChromeClient());
 
-        table_set.addJavascriptInterface(this, "AndroidInterface");
-
 
         //웹 뷰가 보여줄 웹 문서 로드
-        table_set.loadUrl("file:///android_asset/drag_and_drop2.html");
+        table_set.loadUrl("file:///android_asset/setting/table.html");
 
         // table_check 버튼 클릭 시 팝업 다이얼로그 표시
         table_check.setOnClickListener(new View.OnClickListener() {
@@ -114,12 +94,7 @@ public class TableSettingFragment extends Fragment {
         // ();
     }
 
-    @JavascriptInterface
-    public void selectTable(int tableId) {
-        Log.d("javascript", "selectTable: " + tableId);
-        //Todo. 다이얼로그 띄우기
-        showPopup();
-    }
+
 
     // 팝업 다이얼로그 표시 메서드
     private void showPopup() {

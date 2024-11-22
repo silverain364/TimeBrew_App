@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import com.t2f4.timebrew.api.RetrofitSetting;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,25 +49,8 @@ public class TableViewFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                view.evaluateJavascript("javascript:getTableNumbers()", value -> {
-                    Log.d("javascript", value.toString());
-                    Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
 
-                    try {
-                        Log.d("javascript", value.toString());
-                        Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
-                        if(value.toString().equals("null")) return;
-
-                        JSONArray jsonArray = new JSONArray(value.toString());
-
-                        for (int i = 0; i < jsonArray.length(); i++)
-                            tableNumberList.add(jsonArray.getInt(i));
-
-                        Log.d("javascript", "convert : " + tableNumberList);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+                view.evaluateJavascript("javascript:loadViewJs()", null);
             }
         });
 
@@ -75,9 +60,9 @@ public class TableViewFragment extends Fragment {
 
         table_view.addJavascriptInterface(this, "AndroidInterface");
 
-
         //웹 뷰가 보여줄 웹 문서 로드
-        table_view.loadUrl("file:///android_asset/drag_and_drop2.html");
+        table_view.loadUrl(RetrofitSetting.FILE_URL + "tmp/table.html");
+
 
         // table_check 버튼 클릭 시 팝업 다이얼로그 표시
         table_check.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +88,32 @@ public class TableViewFragment extends Fragment {
     @JavascriptInterface
     public void selectTable(int tableId){
         Log.d("javascript", "selectTable: " + tableId);
-        //Todo. 다이얼로그 띄우기
         showPopup();
+    }
+
+    @JavascriptInterface
+    public void loadCompleteJavascript(){
+        getActivity().runOnUiThread(() -> {
+            table_view.evaluateJavascript("javascript:getTableNumbers()", value -> {
+                Log.d("javascript", value.toString());
+                Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
+
+                try {
+                    Log.d("javascript", value.toString());
+                    Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
+                    if(value.toString().equals("null")) return;
+
+                    JSONArray jsonArray = new JSONArray(value.toString());
+
+                    for (int i = 0; i < jsonArray.length(); i++)
+                        tableNumberList.add(jsonArray.getInt(i));
+
+                    Log.d("javascript", "convert : " + tableNumberList);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        });
     }
 
     // 팝업 다이얼로그 표시 메서드
