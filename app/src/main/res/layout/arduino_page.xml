@@ -203,7 +203,7 @@
             android:paddingHorizontal="16dp"
 
     />
-    
+
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -222,142 +222,69 @@
             android:paddingHorizontal="32dp"
     />
 
-    
-    
-<!--매칭 않은 인식장치 리스트-->
-<TableLayout
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/ncon_arduino"
-        app:layout_constraintLeft_toRightOf="@+id/connect_list"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="80dp"
->
 
+
+<!--매칭 않은 인식장치 리스트-->
     <TextView
-            android:layout_width="400dp"
-            android:layout_height="60dp"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ncon_arduino"
             android:text="미연결 인식장치"
-            android:textSize="28sp"
-            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@+id/connect_list"
+            app:layout_constraintLeft_toRightOf="@+id/connect_list"
+            android:padding="8dp"
             android:background="#543118"
             android:textColor="@color/white"
             android:textStyle="bold"
-    />
-
-
-    <TextView
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:text="ADIN 007"
             android:textSize="28sp"
             android:gravity="center"
-            android:background="@drawable/con_table_inline"
+            android:layout_marginLeft="80dp"
     />
 
-    <TextView
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:text="ADIN 002"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:background="@drawable/con_table_inline"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/uncon_a_list"
+            android:layout_width="320dp"
+            android:layout_height="300dp"
+            android:background="@color/white"
+            android:scrollbarSize="4dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/ncon_arduino"
+            app:layout_constraintTop_toBottomOf="@id/ncon_arduino"
+            app:layout_constraintVertical_bias="0.0"
+            android:paddingLeft="8dp"
     />
-
-    <TextView
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:text="ADIN 004"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:background="@drawable/con_table_inline"
-    />
-    <TextView
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:text="ADIN 008"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:background="@drawable/con_table_inline"
-    />
-
-    <TextView
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:text="ADIN 012"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:background="@drawable/con_table_inline"
-    />
-</TableLayout>
 
     <!--매칭 않은 테이블 리스트-->
-    <TableLayout
+    <TextView
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="72dp"
-    >
+            android:id="@+id/ncon_table"
+            android:text="미연결 테이블"
+            app:layout_constraintTop_toTopOf="@+id/connect_list"
+            app:layout_constraintLeft_toRightOf="@+id/ncon_arduino"
+            android:padding="8dp"
+            android:background="#543118"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+    />
 
-        <TextView
-                android:layout_width="400dp"
-                android:layout_height="60dp"
-                android:text="미연결 테이블"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:background="#543118"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-        />
-
-
-        <TextView
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Table 006"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:background="@drawable/con_table_inline"
-        />
-
-        <TextView
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Table 001"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:background="@drawable/con_table_inline"
-        />
-
-        <TextView
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Table 005"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:background="@drawable/con_table_inline"
-        />
-        <TextView
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Table 011"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:background="@drawable/con_table_inline"
-        />
-        <TextView
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Table 013"
-                android:textSize="28sp"
-                android:gravity="center"
-                android:background="@drawable/con_table_inline"
-        />
-
-    </TableLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/uncon_t_list"
+            android:layout_width="320dp"
+            android:layout_height="300dp"
+            android:background="@color/white"
+            android:scrollbarSize="4dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/ncon_table"
+            app:layout_constraintTop_toBottomOf="@id/ncon_table"
+            app:layout_constraintVertical_bias="0.0"
+            android:paddingLeft="8dp"
+    />
 
     <!--연결할 리스트 선택-->
 
@@ -365,7 +292,7 @@
             android:layout_width="404dp"
             android:layout_height="80dp"
             android:id="@+id/select_con"
-            app:layout_constraintTop_toBottomOf="@+id/ncon_arduino"
+            app:layout_constraintTop_toBottomOf="@+id/uncon_t_list"
             app:layout_constraintLeft_toRightOf="@+id/select_disc"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="192dp"
