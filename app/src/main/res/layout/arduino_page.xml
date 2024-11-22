@@ -6,17 +6,6 @@
         android:background="@color/white">
     >
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="TimeBrew ☕"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintLeft_toLeftOf="parent"
-              android:layout_marginLeft="20dp"
-              android:layout_marginTop="12dp"
-              android:textSize="20dp"
-              android:textStyle="bold"
-    />
-
-
 <!--테이블 작성을 위해 TableLayout 사용-->
 
 <!--매칭 완료 된 테이블과 아두이노 리스트-->

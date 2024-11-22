@@ -19,6 +19,7 @@ public class TemplatePage extends AppCompatActivity {
     private TableSettingFragment tableSettingFragment;
     private MemberInfoPage memberInfoPage;
     private ArduinoPage arduinoPage;
+    private TableViewFragment tableViewFragment;
 
 
 
@@ -35,6 +36,7 @@ public class TemplatePage extends AppCompatActivity {
         tableSettingFragment = new TableSettingFragment();
         memberInfoPage = new MemberInfoPage();
         arduinoPage = new ArduinoPage();
+        tableViewFragment = new TableViewFragment();
 
 
         hamburgerButton.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +65,11 @@ public class TemplatePage extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_arduino_page) {
                     fragmentManager.beginTransaction()
                             .replace(R.id.frameLayoutContainer, arduinoPage)
+                            .addToBackStack(null)
+                            .commit();
+                } else if (item.getItemId() == R.id.nav_table_view_page) {
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frameLayoutContainer, tableViewFragment)
                             .addToBackStack(null)
                             .commit();
                 }

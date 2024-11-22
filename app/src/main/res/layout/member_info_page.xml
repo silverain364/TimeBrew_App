@@ -14,7 +14,6 @@
         android:textSize="50dp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -23,7 +22,7 @@
         android:layout_width="900dp"
         android:layout_height="2dp"
         android:background="#543118"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member_info_txt"/>
@@ -32,7 +31,7 @@
             android:id="@+id/frameLayoutOverlay"
             android:layout_width="580dp"
             android:layout_height="500dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="100dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +39,7 @@
 
         <TextView
                 android:layout_width="580dp"
-                android:layout_height="65dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="5dp"
                 android:paddingTop="15dp"
                 android:text="사업자 이름"
@@ -52,7 +51,7 @@
                 android:id="@+id/member_info_name_txt"
                 android:layout_marginTop="10dp"
                 android:layout_width="370dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:paddingTop="10dp"
                 android:textSize="20dp"
                 android:hint="김사장"
@@ -61,7 +60,7 @@
                 android:translationX="200dp" />
         <TextView
                 android:layout_width="580dp"
-                android:layout_height="65dp"
+                android:layout_height="60dp"
                 android:translationY="90dp"
                 android:paddingTop="15dp"
                 android:text="카페명"
@@ -73,7 +72,7 @@
                 android:id="@+id/member_info_cafename_txt"
                 android:layout_marginTop="5dp"
                 android:layout_width="370dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:translationY="90dp"
                 android:paddingTop="10dp"
                 android:textSize="20dp"
@@ -83,7 +82,7 @@
                 android:translationX="200dp" />
         <TextView
                 android:layout_width="580dp"
-                android:layout_height="65dp"
+                android:layout_height="60dp"
                 android:translationY="180dp"
                 android:paddingTop="15dp"
                 android:text="이메일"
@@ -94,7 +93,7 @@
                 android:id="@+id/member_info_email_txt"
                 android:layout_marginTop="5dp"
                 android:layout_width="370dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:translationY="180dp"
                 android:textSize="20dp"
                 android:paddingTop="10dp"
@@ -104,7 +103,7 @@
                 android:translationX="200dp" />
         <TextView
                 android:layout_width="580dp"
-                android:layout_height="65dp"
+                android:layout_height="60dp"
                 android:translationY="270dp"
                 android:paddingTop="15dp"
                 android:text="아이디"
@@ -115,7 +114,7 @@
         <TextView
                 android:layout_marginTop="5dp"
                 android:layout_width="370dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:translationY="270dp"
                 android:paddingTop="10dp"
                 android:textSize="20dp"
@@ -125,7 +124,7 @@
                 android:translationX="200dp" />
         <TextView
                 android:layout_width="580dp"
-                android:layout_height="65dp"
+                android:layout_height="60dp"
                 android:translationY="360dp"
                 android:paddingTop="15dp"
                 android:text="전화번호"
@@ -137,7 +136,7 @@
                 android:id="@+id/member_info_PhNum_txt"
                 android:layout_marginTop="5dp"
                 android:layout_width="370dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:translationY="360dp"
                 android:textSize="20dp"
                 android:paddingTop="10dp"
@@ -153,7 +152,7 @@
             android:layout_height="wrap_content"
             android:text="확  인"
             android:background="@drawable/solid_button"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
