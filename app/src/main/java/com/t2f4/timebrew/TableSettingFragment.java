@@ -13,10 +13,13 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.t2f4.timebrew.api.RetrofitSetting;
 import com.t2f4.timebrew.server.RESTManager;
+import com.t2f4.timebrew.server.dto.TableDto;
+import com.t2f4.timebrew.server.repository.TableRepository;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,11 +29,8 @@ import java.util.List;
 
 public class TableSettingFragment extends Fragment {
 
-    public WebView table_set;
-    private Button table_check;
-    private List<Integer> tableNumberList = new ArrayList<>();
-
-    private Button arduino_check;
+    private WebView table_set;
+    private TableRepository tableRepository = new TableRepository();
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -56,6 +56,8 @@ public class TableSettingFragment extends Fragment {
             }
         });
 
+        table_set.addJavascriptInterface(this, "AndroidInterface");
+
 
         // alert(), confirm() 같은 팝업 기능의 Js 코드 사용 (혹시 몰라 사용 할 수 있도록 코드 작성)
         table_set.setWebChromeClient(new WebChromeClient());
@@ -67,6 +69,31 @@ public class TableSettingFragment extends Fragment {
         return root;
     }
 
+    @JavascriptInterface
+    public void showToast(String msg){
+        getActivity().runOnUiThread(() -> {
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    //변경 사항을 저장할 때
+    @JavascriptInterface
+    public void saveTable(String jsonArrayTableIds){
+        List<Integer> tableIds = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = new JSONArray(jsonArrayTableIds);
+            for(int i = 0; i < jsonArray.length(); i++)
+                tableIds.add(jsonArray.getInt(i));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        //1. Repository에 저장
+        tableIds.forEach(id -> tableRepository.save(new TableDto(id)));
+
+        //Todo.2. 서버에 저장
+    }
 
     //    이전 키 눌렀을 때, 뒤로 이동 가능. 뒤로 갈 수 없으면 앱 종료
     public void onBackPassed() {
