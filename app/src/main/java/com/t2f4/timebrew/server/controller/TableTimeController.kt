@@ -26,8 +26,10 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         val bellId = session?.parameters?.get("bellId")
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "exist not bellId");
 
+        val reamingTimePercent = vibratingBellTimeService.reamingTimePercent(bellId[0]);
 
-        return super.get(uriResource, urlParams, session)
+        return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain",
+            reamingTimePercent.toString())
     }
 
     override fun post( //특정 아두이노에 시간 할당
@@ -57,7 +59,10 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
 
         val setBtn = dialog2.findViewById<Button>(R.id.bt_set_btn)
         val bellIdTv = dialog2.findViewById<TextView>(R.id.buzzer_num)
-        bellIdTv.text = bellId + " 진동벨"
+        bellIdTv.text = "$bellId 진동벨"
+
+        //Todo. 나중에 RFID랑 bellId랑 매칭시키는 작업이 필요할 것 같음
+        //Todo. minute 계산하는 로직 필요
 
         setBtn.setOnClickListener { showCustomDialog2(bellId, 60, context) }
         dialog2.show()
