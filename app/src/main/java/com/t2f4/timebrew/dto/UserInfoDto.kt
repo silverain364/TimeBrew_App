@@ -1,6 +1,6 @@
 package com.t2f4.timebrew.dto
 
-data class UserDto(
+data class UserInfoDto(
     var uid: String?,
     var email: String?,
     var username: String?,

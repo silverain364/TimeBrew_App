@@ -9,9 +9,8 @@ import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.application.LoginService;
 import com.t2f4.timebrew.application.ValidateService;
-import com.t2f4.timebrew.dto.UserDto;
+import com.t2f4.timebrew.dto.UserInfoDto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -75,7 +74,7 @@ public class JoinPage extends AppCompatActivity {
             loginService.signOn(email, pw, task -> {
                 if(task.isSuccessful()){ //회원가입을 성공한 경우
                     String uid = task.getResult().getUser().getUid();
-                    UserDto userDto = new UserDto(uid, email, memberName, cafeName, phone);
+                    UserInfoDto userDto = new UserInfoDto(uid, email, memberName, cafeName, phone);
 
                     //Todo. 서버로 회원 정보를 보냄
                 }
