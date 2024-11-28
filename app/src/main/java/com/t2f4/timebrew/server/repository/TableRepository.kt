@@ -4,7 +4,6 @@ import com.t2f4.timebrew.server.dto.TableDto
 
 class TableRepository {
     companion object {
-        //private val tableRe
         private val tableNumberStore:
                 HashMap<Integer, TableDto> = HashMap()
     }

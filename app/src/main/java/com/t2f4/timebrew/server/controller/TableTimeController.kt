@@ -6,25 +6,50 @@ import android.content.Context
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.TimePicker
 import com.t2f4.timebrew.InitApplication
 import com.t2f4.timebrew.IntroPage
 import com.t2f4.timebrew.R
 import com.t2f4.timebrew.server.RESTManager
+import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository
+import com.t2f4.timebrew.server.repository.TableRepository
 import com.t2f4.timebrew.server.service.VibratingBellTimeService
 import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.router.RouterNanoHTTPD
+import java.sql.Time
 import kotlin.concurrent.thread
+import kotlin.math.tan
 
 class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
     private val vibratingBellTimeService = VibratingBellTimeService();
+    private val recognitionDeviceRepository = RecognitionDeviceRepository();
+    private val tableRepository = TableRepository();
+
     override fun get( //남은 시간이 얼마나 남았는지 조회할 때 사용
         uriResource: RouterNanoHTTPD.UriResource?,
         urlParams: MutableMap<String, String>?,
         session: NanoHTTPD.IHTTPSession?
     ): NanoHTTPD.Response {
         //Todo. Server로 부터 아두이노 남은 시간 가져오기 또는 저장된 아두이노 시간 정보 가져오기
-        val bellId = session?.parameters?.get("bellId")
-            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "exist not bellId");
+        val bellId = session?.parameters?.get("bellId") //bellId가 없다면
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist bellId");
+
+        val deviceId = session?.parameters?.get("deviceId") //deviceId가 없다면
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist deviceId");
+
+        val device = recognitionDeviceRepository.findById(deviceId[0]) //device가 메모리에 등록되어 있지 않다면
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain",  "not exist device")
+
+        //tableId가 설정되어 있지 않다면
+        device.tableId ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect tableId")
+        val table = tableRepository.findById(device.tableId!!);
+
+        //table이 존재하지 않다면
+        device.tableId = null; //존재하지 않은 테이블 임으로 연결을 끊어줌
+        recognitionDeviceRepository.save(device);
+        table ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect table")
+
+
 
         val reamingTimePercent = vibratingBellTimeService.reamingTimePercent(bellId[0]);
 
@@ -42,6 +67,7 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         val bellId = session?.parameters?.get("bellId")
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "exist not bellId");
 
+
         InitApplication.getCurrentActivity().runOnUiThread {
             showBuzzerPopup(bellId.toString(), InitApplication.getCurrentActivity());
         }
@@ -52,6 +78,8 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
     private fun showBuzzerPopup(bellId: String, context: Context) {
         val dialog2 = Dialog(context)
         dialog2.setContentView(R.layout.buzzer_rec)
+        val timePicker = dialog2.findViewById<TimePicker>(R.id.timePicker);
+        timePicker.setIs24HourView(true);
 
         val width: Int = (context.resources.displayMetrics.widthPixels * 0.23).toInt()
         val height: Int = (context.resources.displayMetrics.heightPixels * 0.63).toInt()
