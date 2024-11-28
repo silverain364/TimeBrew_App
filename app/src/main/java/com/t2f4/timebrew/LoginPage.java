@@ -14,7 +14,7 @@ import com.t2f4.timebrew.application.LoginService;
 import com.t2f4.timebrew.application.ValidateService;
 
 public class LoginPage extends AppCompatActivity {
-    public static boolean TEST = true;
+    public static boolean TEST = false;
     private EditText emailEt, pwEt;
     private ValidateService validateService;
     private LoginService loginService;
@@ -57,7 +57,7 @@ public class LoginPage extends AppCompatActivity {
 
             loginService.signIn(email, pw, task -> {
                 if (task.isSuccessful()) { //로그인 성공시
-                    Intent intent = new Intent(LoginPage.this, TableSettingFragment.class);
+                    Intent intent = new Intent(LoginPage.this, TemplatePage.class);
                     startActivity(intent);
                     finish();
                 } else {

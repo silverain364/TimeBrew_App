@@ -68,7 +68,8 @@ dependencies {
 
     //gson
     implementation("com.google.code.gson:gson:2.10.1")
-
+    //String 형태를 허용하겠다
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
 
     //firebase
     implementation("com.google.firebase:firebase-analytics")
@@ -78,4 +79,6 @@ dependencies {
 
     //Glide : 이미지 쉽게 가져오기
     implementation("com.github.bumptech.glide:glide:4.13.2")
+
+
 }

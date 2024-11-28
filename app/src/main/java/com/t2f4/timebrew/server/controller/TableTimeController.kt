@@ -94,6 +94,8 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         dialog2.setContentView(R.layout.buzzer_rec)
         val timePicker = dialog2.findViewById<TimePicker>(R.id.timePicker);
         timePicker.setIs24HourView(true);
+        timePicker.hour = 1;
+        timePicker.minute = 0;
 
         //화면 잘림 이슈로 주석처리 했음
 //        val width: Int = (context.resources.displayMetrics.widthPixels * 0.23).toInt()
@@ -105,9 +107,13 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         bellIdTv.text = "$bellId 진동벨"
 
         //Todo. 나중에 RFID랑 bellId랑 매칭시키는 작업이 필요할 것 같음
-        //Todo. minute 계산하는 로직 필요
 
-        setBtn.setOnClickListener { showCustomDialog2(bellId, 60, context) }
+
+        setBtn.setOnClickListener {
+            //minute 계산하는 로직
+            val minute = timePicker.hour * 60 + timePicker.minute
+            showCustomDialog2(bellId, minute, context)
+        }
         dialog2.show()
     }
 
@@ -125,7 +131,9 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         val cancelBtn = dialog2.findViewById<Button>(R.id.dlg_cancle_btn)
 
         okBtn.setOnClickListener {
+            //만약에 이전에 정보가 있으면 덮어쓰기 됨.
             vibratingBellTimeService.setTime(bellId = bellId, minute = minute);
+
             //Todo. 서버에 전송 필요
             dialog2.dismiss() // 다이얼로그 닫기
         }
