@@ -90,7 +90,7 @@ public class TableSettingFragment extends Fragment {
         }
 
         //1. Repository에 저장
-        tableIds.forEach(id -> tableRepository.save(new TableDto(id)));
+        //tableIds.forEach(id -> tableRepository.save(new TableDto(id)));
 
         //Todo.2. 서버에 저장
     }

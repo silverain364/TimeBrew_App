@@ -22,5 +22,7 @@ class VibratingBellTimeRepository {
         return vibratingBellTimeStore.contains(vibratingBellId);
     }
 
-
+    fun findAll(): List<VibratingBellTimeDto>{
+        return vibratingBellTimeStore.values.toList()
+    }
 }

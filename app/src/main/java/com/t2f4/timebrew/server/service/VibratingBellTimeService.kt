@@ -8,6 +8,18 @@ import java.time.LocalDateTime
 class VibratingBellTimeService {
     private val vibratingBellTimeRepository = VibratingBellTimeRepository();
 
+    fun findByAll(): List<VibratingBellTimeDto>{
+        return vibratingBellTimeRepository.findAll()
+    }
+
+    fun save(vibratingBellTimeDto: VibratingBellTimeDto): VibratingBellTimeDto?{
+        return vibratingBellTimeRepository.save(vibratingBellTimeDto)
+    }
+
+    fun findById(bellId: String): VibratingBellTimeDto?{
+        return vibratingBellTimeRepository.findById(bellId);
+    }
+
     fun setTime(bellId: String, minute: Int){
         vibratingBellTimeRepository.save(VibratingBellTimeDto(
             LocalDateTime.now(), minute, LocalDateTime.now().plusMinutes(minute as Long), bellId

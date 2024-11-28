@@ -55,10 +55,18 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         tableAndRecognitionDevice.removeByTableId(tableId) //존재하지 않은 테이블 임으로 연결을 끊어줌
         table ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect table")
 
+        //time이 존재하지 않는다면 - 진동벨에 시간이 부여되지 않았다면
+        val time = vibratingBellTimeService.findById(bellId[0])
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain", "-1.0")
 
+        //좌석 최신화 및
+        time.bellId = bellId[0]
+        vibratingBellTimeService.save(time)
 
+        //남은 시간을 percent로 받음
         val reamingTimePercent = vibratingBellTimeService.reamingTimePercent(bellId[0]);
 
+        //남은 시간을 반환
         return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain",
             reamingTimePercent.toString())
     }
@@ -87,9 +95,10 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         val timePicker = dialog2.findViewById<TimePicker>(R.id.timePicker);
         timePicker.setIs24HourView(true);
 
-        val width: Int = (context.resources.displayMetrics.widthPixels * 0.23).toInt()
-        val height: Int = (context.resources.displayMetrics.heightPixels * 0.63).toInt()
-        dialog2.window!!.setLayout(width, height)
+        //화면 잘림 이슈로 주석처리 했음
+//        val width: Int = (context.resources.displayMetrics.widthPixels * 0.23).toInt()
+//        val height: Int = (context.resources.displayMetrics.heightPixels * 0.63).toInt()
+//        dialog2.window!!.setLayout(width, height)
 
         val setBtn = dialog2.findViewById<Button>(R.id.bt_set_btn)
         val bellIdTv = dialog2.findViewById<TextView>(R.id.buzzer_num)
