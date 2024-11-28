@@ -43,9 +43,9 @@ android:background="@color/white">
             app:layout_constraintTop_toBottomOf="@+id/buzzer_num"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="20dp"
     />
 
+    <!--
     <TextView
             android:layout_width="140dp"
             android:layout_height="64dp"
@@ -58,27 +58,40 @@ android:background="@color/white">
             android:text="04:00"
             android:textSize="30dp"
             android:gravity="center"
+            android:inputType="time"
+            android:maxLength="5"
             android:shadowColor="@color/black"
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="1"
-    />
+    /> -->
+
+    <TimePicker
+            android:backgroundTint="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tset"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
 
     <Button
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:id="@+id/bt_set_btn"
-            app:layout_constraintTop_toBottomOf="@+id/buzzer_time_set"
+            app:layout_constraintTop_toBottomOf="@+id/timePicker"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="60dp"
-            android:padding="16dp"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:text="완료"
             android:backgroundTint="@color/btn_color"
             android:textColor="@color/black"
 
     />
+
+
+
 
 
 
