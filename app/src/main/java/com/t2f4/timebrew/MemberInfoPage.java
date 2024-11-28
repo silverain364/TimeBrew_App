@@ -16,21 +16,23 @@ import org.jetbrains.annotations.NotNull;
 public class MemberInfoPage extends Fragment {
 
     @Nullable
-    @org.jetbrains.annotations.Nullable
     @Override
-    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.member_info_page, container, false);
-        root.findViewById(R.id.member_info_check_btn);
 
-        root.setOnClickListener(new View.OnClickListener() {
+        // 버튼 참조
+        Button memberInfoCheckBtn = root.findViewById(R.id.member_info_check_btn);
+
+        // 버튼에 클릭 리스너 설정
+        memberInfoCheckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Intent를 사용해 TemplatePage로 이동
                 Intent intent = new Intent(getActivity(), TemplatePage.class);
                 startActivity(intent);
             }
         });
+
         return root;
-
     }
-
 }

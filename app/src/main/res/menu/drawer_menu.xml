@@ -4,7 +4,8 @@
     <item
             android:id="@+id/nav_app_info"
             android:title="아잇코님! 지금은 커피를 즐길 시간"
-            android:enabled="false" />
+            android:enabled="false"
+            style="@style/MenuTextStyle"/>
 
     <item
             android:id="@+id/nav_view"
