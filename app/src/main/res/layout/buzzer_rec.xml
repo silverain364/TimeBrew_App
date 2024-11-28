@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="254dp"
-                                                   android:layout_height="440dp"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-android:background="@color/white">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="330dp"
+        android:layout_height="515dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white">
 <!--진동벨 인식 시 나타나는 팝업창 레이아웃으로 작성한 화면-->
 
     <ImageView
@@ -21,12 +22,13 @@ android:background="@color/white">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:id="@+id/buzzer_num"
             app:layout_constraintTop_toBottomOf="@+id/logo_img"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="1번 진동벨"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:shadowColor="@color/black"
             android:shadowDx="2"
             android:shadowDy="2"
@@ -37,9 +39,10 @@ android:background="@color/white">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
             android:id="@+id/tset"
-            android:text="시간설정"
-            android:textSize="25dp"
+            android:text="시간 설정"
+            android:textSize="20dp"
             app:layout_constraintTop_toBottomOf="@+id/buzzer_num"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -71,20 +74,22 @@ android:background="@color/white">
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tset"
             app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="10dp"
             android:id="@+id/timePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:timePickerMode="spinner" />
 
     <Button
-            android:layout_width="120dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/bt_set_btn"
             app:layout_constraintTop_toBottomOf="@+id/timePicker"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:textSize="20dp"
-            android:text="완료"
+            android:textSize="16dp"
+            android:text="완 료"
             android:backgroundTint="@color/btn_color"
             android:textColor="@color/black"
 
