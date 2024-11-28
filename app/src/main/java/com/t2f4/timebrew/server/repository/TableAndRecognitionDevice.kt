@@ -15,7 +15,38 @@ class TableAndRecognitionDevice {
     }
 
     fun removeByTableId(tableId: Integer){
-      //  Integer tableAndDevice.remove(tableId);
+        val deviceId = tableAndDevice.remove(tableId)
+            ?: return
 
+        deviceAndTable.remove(deviceId);
     }
+
+    fun removeByDeviceId(deviceId: Integer){
+        val tableId = deviceAndTable.remove(deviceId)
+            ?: return
+
+        tableAndDevice.remove(tableId)
+    }
+
+    fun findByDeviceId(deviceId: Integer): Integer?{
+        return deviceAndTable[deviceId]
+    }
+
+    fun findByTableId(tableId: Integer): Integer?{
+        return tableAndDevice[tableId]
+    }
+
+    fun removeAll(){
+        deviceAndTable.clear()
+        tableAndDevice.clear()
+    }
+
+    fun findAllTable(): List<Integer> {
+        return deviceAndTable.values.toList()
+    }
+
+    fun findAllDevice(): List<Integer> {
+        return tableAndDevice.values.toList()
+    }
+
 }

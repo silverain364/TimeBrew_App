@@ -12,6 +12,7 @@ import com.t2f4.timebrew.IntroPage
 import com.t2f4.timebrew.R
 import com.t2f4.timebrew.server.RESTManager
 import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository
+import com.t2f4.timebrew.server.repository.TableAndRecognitionDevice
 import com.t2f4.timebrew.server.repository.TableRepository
 import com.t2f4.timebrew.server.service.VibratingBellTimeService
 import fi.iki.elonen.NanoHTTPD
@@ -23,6 +24,7 @@ import kotlin.math.tan
 class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
     private val vibratingBellTimeService = VibratingBellTimeService();
     private val recognitionDeviceRepository = RecognitionDeviceRepository();
+    private val tableAndRecognitionDevice = TableAndRecognitionDevice()
     private val tableRepository = TableRepository();
 
     override fun get( //남은 시간이 얼마나 남았는지 조회할 때 사용
@@ -34,19 +36,23 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         val bellId = session?.parameters?.get("bellId") //bellId가 없다면
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist bellId");
 
-        val deviceId = session?.parameters?.get("deviceId") //deviceId가 없다면
+        val deviceIdString = session?.parameters?.get("deviceId") //deviceId가 없다면
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist deviceId");
 
-        val device = recognitionDeviceRepository.findById(deviceId[0]) //device가 메모리에 등록되어 있지 않다면
+        val deviceId = Integer.valueOf(deviceIdString[0]) as Integer
+
+        val device = recognitionDeviceRepository.findById(deviceId) //device가 메모리에 등록되어 있지 않다면
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain",  "not exist device")
 
+
+        val tableId = tableAndRecognitionDevice.findByDeviceId(deviceId)
+
         //tableId가 설정되어 있지 않다면
-        device.tableId ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect tableId")
-        val table = tableRepository.findById(device.tableId!!);
+        tableId ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect tableId")
+        val table = tableRepository.findById(tableId!!);
 
         //table이 존재하지 않다면
-        device.tableId = null; //존재하지 않은 테이블 임으로 연결을 끊어줌
-        recognitionDeviceRepository.save(device);
+        tableAndRecognitionDevice.removeByTableId(tableId) //존재하지 않은 테이블 임으로 연결을 끊어줌
         table ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect table")
 
 

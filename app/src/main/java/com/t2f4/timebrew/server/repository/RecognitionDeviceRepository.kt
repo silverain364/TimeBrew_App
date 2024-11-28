@@ -4,11 +4,11 @@ import com.t2f4.timebrew.server.dto.RecognitionDeviceDto
 
 class RecognitionDeviceRepository {
     companion object{
-        private val recognitionDeviceStore: HashMap<String, RecognitionDeviceDto>
+        private val recognitionDeviceStore: HashMap<Integer, RecognitionDeviceDto>
             = HashMap()
     }
 
-    fun findById(recognitionDeviceId: String): RecognitionDeviceDto?{
+    fun findById(recognitionDeviceId: Integer): RecognitionDeviceDto?{
         return recognitionDeviceStore[recognitionDeviceId]
     }
 

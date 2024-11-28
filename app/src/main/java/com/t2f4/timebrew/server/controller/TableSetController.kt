@@ -21,12 +21,14 @@ class TableSetController: RouterNanoHTTPD.GeneralHandler() {
         Log.d("http", "msg : " + session?.remoteIpAddress);
 
         //인식장치 id 받기
-        val recognitionDeviceId = urlParams?.get("id")
+        val deviceIdString = urlParams?.get("id")
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "", "not exist id!");
 
+        val deviceId = Integer.valueOf(deviceIdString) as Integer
+
         //인식장치 id로 dto조회 없으면 생성
-        val recognitionDeviceDto =  recognitionDeviceRepository.findById(recognitionDeviceId)
-            ?: recognitionDeviceRepository.save(RecognitionDeviceDto(recognitionDeviceId, null));
+        val recognitionDeviceDto =  recognitionDeviceRepository.findById(deviceId)
+            ?: recognitionDeviceRepository.save(RecognitionDeviceDto(deviceId));
 
         //객체가 안 만들어지면 예외처리
         recognitionDeviceDto ?: throw Exception();
