@@ -1,9 +1,6 @@
 package com.t2f4.timebrew.server.repository
 
-import android.content.Intent
-import android.devicelock.DeviceId
-
-class TableAndRecognitionDevice {
+class TableAndRecognitionDeviceRepository {
     companion object{
         private val tableAndDevice: HashMap<Integer, Integer> = HashMap()
         private val deviceAndTable: HashMap<Integer, Integer> = HashMap()

@@ -55,6 +55,8 @@ public class Arduino_Adapter extends RecyclerView.Adapter<Arduino_Adapter.ViewHo
             return null;
 
         Integer remove = ids.remove(selectNumber);
+        selectItemView.setBackgroundColor(Color.rgb(255,255,255));
+
 
         notifyItemRemoved(selectNumber);
         selectNumber = -1;

@@ -18,10 +18,11 @@ class TableSetController : RouterNanoHTTPD.GeneralHandler() {
         session: NanoHTTPD.IHTTPSession?
     ): NanoHTTPD.Response {
         //Todo. Setting 구현 및 등록 구현
-        Log.d("http", "msg : " + session?.remoteIpAddress);
+        Log.d("http", "msg : " + session?.remoteIpAddress)
+        Log.d("http", "param : " + session?.parameters?.keys)
 
         //인식장치 id 받기
-        val deviceIdString = urlParams?.get("id")
+        val deviceIdString = session?.parameters?.get("id")?.get(0)
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "", "not exist id!");
 
         val deviceId = Integer.valueOf(deviceIdString) as Integer

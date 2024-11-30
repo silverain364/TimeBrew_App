@@ -1,32 +1,25 @@
 package com.t2f4.timebrew;
 
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.*;
-import android.widget.Button;
 import android.widget.Toast;
-import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.api.RetrofitSetting;
 import com.t2f4.timebrew.api.TableSpaceApi;
 import com.t2f4.timebrew.server.RESTManager;
 import com.t2f4.timebrew.server.dto.TableDto;
-import com.t2f4.timebrew.server.repository.TableAndRecognitionDevice;
+import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository;
 import com.t2f4.timebrew.server.repository.TableRepository;
-import com.t2f4.timebrew.util.CustomCallback;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -36,7 +29,6 @@ import org.json.JSONException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -47,7 +39,7 @@ public class TableSettingFragment extends Fragment {
 
     private WebView table_set;
     private TableRepository tableRepository = new TableRepository();
-    private TableAndRecognitionDevice tableAndRecognitionDevice = new TableAndRecognitionDevice();
+    private TableAndRecognitionDeviceRepository tableAndRecognitionDevice = new TableAndRecognitionDeviceRepository();
     private TableSpaceApi tableSpaceApi = RetrofitSetting.Companion.getRetrofit().create(TableSpaceApi.class);
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private AlertDialog loadingDialog;

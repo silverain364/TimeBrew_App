@@ -1,6 +1,5 @@
 package com.t2f4.timebrew.server.controller
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
@@ -8,23 +7,18 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.TimePicker
 import com.t2f4.timebrew.InitApplication
-import com.t2f4.timebrew.IntroPage
 import com.t2f4.timebrew.R
-import com.t2f4.timebrew.server.RESTManager
 import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository
-import com.t2f4.timebrew.server.repository.TableAndRecognitionDevice
+import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository
 import com.t2f4.timebrew.server.repository.TableRepository
 import com.t2f4.timebrew.server.service.VibratingBellTimeService
 import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.router.RouterNanoHTTPD
-import java.sql.Time
-import kotlin.concurrent.thread
-import kotlin.math.tan
 
 class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
     private val vibratingBellTimeService = VibratingBellTimeService();
     private val recognitionDeviceRepository = RecognitionDeviceRepository();
-    private val tableAndRecognitionDevice = TableAndRecognitionDevice()
+    private val tableAndRecognitionDevice = TableAndRecognitionDeviceRepository()
     private val tableRepository = TableRepository();
 
     override fun get( //남은 시간이 얼마나 남았는지 조회할 때 사용

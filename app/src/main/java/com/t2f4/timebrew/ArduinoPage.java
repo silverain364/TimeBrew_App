@@ -4,25 +4,24 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import com.t2f4.timebrew.dto.ConnectInfoDto;
+import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository;
+import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository;
+import com.t2f4.timebrew.server.repository.TableRepository;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArduinoPage extends Fragment {
 
@@ -41,6 +40,12 @@ public class ArduinoPage extends Fragment {
     private TextView selectConTableTv, selectConArduinoTv;
     private Button disconnectionBtn, conBtn;
 
+    private TableRepository tableRepository = new TableRepository();
+    private RecognitionDeviceRepository recognitionDeviceRepository
+            = new RecognitionDeviceRepository();
+    private TableAndRecognitionDeviceRepository tableAndRecognitionDeviceRepository
+            = new TableAndRecognitionDeviceRepository();
+
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.arduino_page, container, false);
@@ -53,11 +58,30 @@ public class ArduinoPage extends Fragment {
         conBtn = root.findViewById(R.id.con_btn);
 
 
+        //connect 정보가 없는 TableId를 가져온다.
+        List<Integer> disCntTableIds = tableRepository.findAll().stream()
+                .filter(dto -> tableAndRecognitionDeviceRepository.findByTableId(dto.getTableId()) == null)
+                .map(dto -> dto.getTableId())
+                .collect(Collectors.toList());
+
+
+        //connect 정보가 없는 deviceId를 가져온다.
+        List<Integer> disCntDeviceIds = recognitionDeviceRepository.findAll().stream()
+                .filter(dto -> tableAndRecognitionDeviceRepository.findByDeviceId(dto.getRecognitionDeviceId()) == null)
+                .map(dto -> dto.getRecognitionDeviceId())
+                .collect(Collectors.toList());
+
         //연결 테이블
         conList = root.findViewById(R.id.connectCompleteRv);
         conList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        tmpAdapter = new ConnectedAdapter(generateDuList3(), discArduinoTv, discTableTv);
+        tmpAdapter = new ConnectedAdapter(
+                tableAndRecognitionDeviceRepository.findAllTable().stream().map(
+                        tableId -> {
+                            return new ConnectInfoDto(tableId, tableAndRecognitionDeviceRepository.findByTableId(tableId));
+                        }
+                ).collect(Collectors.toList())
+                , discArduinoTv, discTableTv);
         conList.setAdapter(tmpAdapter);
         conList.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
@@ -68,8 +92,10 @@ public class ArduinoPage extends Fragment {
         uncon_a_list.setLayoutManager(layoutManager1);
         uncon_a_list.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
-        List<Integer> dummyList1 = generateDummyList();
-        arduinoAdapter = new Arduino_Adapter("Table", dummyList1, selectConArduinoTv);
+        arduinoAdapter = new Arduino_Adapter("DEVICE"
+                , disCntDeviceIds
+                , selectConArduinoTv);
+
         uncon_a_list.setAdapter(arduinoAdapter);
 
         // 두 번째 리스트 설정 (미연결 테이블)
@@ -79,8 +105,9 @@ public class ArduinoPage extends Fragment {
         uncon_t_list.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
 
-        List<Integer> dummyList2 = generateDummyList();
-        tableAdapter = new Arduino_Adapter("Arduino", dummyList2, selectConTableTv); // Table_Adapter를 초기화
+        tableAdapter = new Arduino_Adapter("TABLE"
+                , disCntTableIds
+                , selectConTableTv); // Table_Adapter를 초기화
         uncon_t_list.setAdapter(tableAdapter);
 
 
@@ -91,17 +118,20 @@ public class ArduinoPage extends Fragment {
                 return;
             }
 
-            //Todo. 서버 통신
-            //Todo. Repository 최신화
 
-            arduinoAdapter.addItem(disConnectDto.getBellNumber());
+            //Todo. 서버 통신
+
+
+            //Repository 최신화
+            tableAndRecognitionDeviceRepository.deleteByTableId(disConnectDto.getTableId());
+
+            arduinoAdapter.addItem(disConnectDto.getDeviceId());
             tableAdapter.addItem(disConnectDto.getTableId());
             arduinoAdapter.notifyItemInserted(arduinoAdapter.getItemCount());
             tableAdapter.notifyItemInserted(tableAdapter.getItemCount());
         });
 
         conBtn.setOnClickListener(v -> {
-
 
             if (tableAdapter.getSelectNumber() == -1 || arduinoAdapter.getSelectNumber() == -1) {
                 Toast.makeText(getActivity(), "선택되지 않았습니다.", Toast.LENGTH_SHORT).show();
@@ -112,9 +142,11 @@ public class ArduinoPage extends Fragment {
             Integer arduinoId = arduinoAdapter.removeSelectList();
 
             //Todo. 서버 통신
-            //Todo. Repository 최신화
 
-            tmpAdapter.addItem(new ConnectInfoDto("x", arduinoId, tableId));
+            //Repository 최신화
+            tableAndRecognitionDeviceRepository.save(tableId, arduinoId);
+
+            tmpAdapter.addItem(new ConnectInfoDto(tableId, arduinoId));
             tmpAdapter.notifyItemInserted(tmpAdapter.getItemCount());
         });
 
@@ -133,7 +165,7 @@ public class ArduinoPage extends Fragment {
     public List<ConnectInfoDto> generateDuList3() {
         List<ConnectInfoDto> dummyList = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
-            dummyList.add(new ConnectInfoDto("AFEFD", i + 1, i + 1));
+            dummyList.add(new ConnectInfoDto(i + 1, i + 1));
         }
 
         return dummyList;
@@ -174,6 +206,8 @@ class ConnectedAdapter extends RecyclerView.Adapter<ConnectedAdapter.ViewHolder>
                 connectInfoDtoList.remove(selectListNumber);
 
         notifyItemRemoved(selectListNumber);
+        selectItemView.setBackgroundColor(Color.rgb(255,255,255));
+
 
         selectItemView = null;
         selectListNumber = -1;
@@ -202,7 +236,7 @@ class ConnectedAdapter extends RecyclerView.Adapter<ConnectedAdapter.ViewHolder>
 
         public void bind(ConnectInfoDto connectInfoDto) {
             tableTv.setText("TABLE : " + connectInfoDto.getTableId());
-            adinoTv.setText("ADINO : " + connectInfoDto.getBellNumber());
+            adinoTv.setText("DEVICE : " + connectInfoDto.getDeviceId());
 
             itemView.setOnClickListener(v -> {
                 if (selectItemView != null)
