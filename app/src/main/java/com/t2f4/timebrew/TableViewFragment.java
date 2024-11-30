@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.api.RetrofitSetting;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -29,6 +30,14 @@ public class TableViewFragment extends Fragment {
     public WebView table_view;
     private Button table_check;
     private List<Integer> tableNumberList = new ArrayList<>();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+
+    //화면 재실행 시 reload!
+    @Override
+    public void onViewStateRestored(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        table_view.reload();
+    }
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -61,7 +70,7 @@ public class TableViewFragment extends Fragment {
         table_view.addJavascriptInterface(this, "AndroidInterface");
 
         //웹 뷰가 보여줄 웹 문서 로드
-        table_view.loadUrl(RetrofitSetting.FILE_URL + "tmp/table.html");
+        table_view.loadUrl(RetrofitSetting.FILE_URL+ "/" + auth.getUid() + "/table.html");
 
 
         // table_check 버튼 클릭 시 팝업 다이얼로그 표시

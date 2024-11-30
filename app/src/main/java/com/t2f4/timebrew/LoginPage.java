@@ -30,7 +30,9 @@ public class LoginPage extends AppCompatActivity {
         Button signInBtn = findViewById(R.id.Login_btn);
 
         emailEt = findViewById(R.id.login_Id_edt);
+        emailEt.setText("user@naver.com");
         pwEt = findViewById(R.id.login_Passwd_edt);
+        pwEt.setText("12341234");
 
         validateService = new ValidateService();
         loginService = new LoginService(FirebaseAuth.getInstance());

@@ -52,7 +52,7 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         val table = tableRepository.findById(tableId!!);
 
         //table이 존재하지 않다면
-        tableAndRecognitionDevice.removeByTableId(tableId) //존재하지 않은 테이블 임으로 연결을 끊어줌
+        tableAndRecognitionDevice.deleteByTableId(tableId) //존재하지 않은 테이블 임으로 연결을 끊어줌
         table ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect table")
 
         //time이 존재하지 않는다면 - 진동벨에 시간이 부여되지 않았다면

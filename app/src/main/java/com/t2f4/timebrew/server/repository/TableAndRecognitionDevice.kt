@@ -14,14 +14,14 @@ class TableAndRecognitionDevice {
         deviceAndTable[deviceId] = tableId;
     }
 
-    fun removeByTableId(tableId: Integer){
+    fun deleteByTableId(tableId: Integer){
         val deviceId = tableAndDevice.remove(tableId)
             ?: return
 
         deviceAndTable.remove(deviceId);
     }
 
-    fun removeByDeviceId(deviceId: Integer){
+    fun deleteByDeviceId(deviceId: Integer){
         val tableId = deviceAndTable.remove(deviceId)
             ?: return
 
@@ -36,7 +36,7 @@ class TableAndRecognitionDevice {
         return tableAndDevice[tableId]
     }
 
-    fun removeAll(){
+    fun deleteAll(){
         deviceAndTable.clear()
         tableAndDevice.clear()
     }
