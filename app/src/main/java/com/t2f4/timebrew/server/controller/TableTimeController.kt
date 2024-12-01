@@ -1,5 +1,6 @@
 package com.t2f4.timebrew.server.controller
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
@@ -26,6 +27,7 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         urlParams: MutableMap<String, String>?,
         session: NanoHTTPD.IHTTPSession?
     ): NanoHTTPD.Response {
+        Log.d("http", session?.parameters.toString());
         //Todo. Server로 부터 아두이노 남은 시간 가져오기 또는 저장된 아두이노 시간 정보 가져오기
         val bellId = session?.parameters?.get("bellId") //bellId가 없다면
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist bellId");
@@ -44,18 +46,17 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         //tableId가 설정되어 있지 않다면
         tableId ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect tableId")
         val table = tableRepository.findById(tableId!!);
-
-        //table이 존재하지 않다면
-        tableAndRecognitionDevice.deleteByTableId(tableId) //존재하지 않은 테이블 임으로 연결을 끊어줌
         table ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.FORBIDDEN, "text/plain", "disConnect table")
 
         //time이 존재하지 않는다면 - 진동벨에 시간이 부여되지 않았다면
+        Log.d("http", "bellId : " + bellId[0]);
         val time = vibratingBellTimeService.findById(bellId[0])
-            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain", "-1.0")
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain", "-2.0")
 
-        //좌석 최신화 및
-        time.bellId = bellId[0]
-        vibratingBellTimeService.save(time)
+        //좌석 최신화
+        tableRepository.deleteByBellId(bellId[0]) //기존에 테이블 연결은 삭제
+        table.bellId = bellId[0]
+        tableRepository.save(table) //세로운 테이블 저장
 
         //남은 시간을 percent로 받음
         val reamingTimePercent = vibratingBellTimeService.reamingTimePercent(bellId[0]);
@@ -63,6 +64,27 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         //남은 시간을 반환
         return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain",
             reamingTimePercent.toString())
+    }
+
+    override fun delete(
+        uriResource: RouterNanoHTTPD.UriResource?,
+        urlParams: MutableMap<String, String>?,
+        session: NanoHTTPD.IHTTPSession?
+    ): NanoHTTPD.Response {
+        return super.delete(uriResource, urlParams, session)
+        val deviceIdString = session?.parameters?.get("deviceId") //deviceId가 없다면
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist deviceId");
+
+        val deviceId = Integer.valueOf(deviceIdString[0]) as Integer
+
+        val tableId = tableAndRecognitionDevice.findByDeviceId(deviceId) //device와 연결된  table이 없는 경우
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "dis connect table");
+
+        val table = tableRepository.findById(tableId)
+            ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.INTERNAL_ERROR, "text/plain", "not find table");
+
+        table?.bellId = null
+        tableRepository.save(table)
     }
 
     override fun post( //특정 아두이노에 시간 할당
@@ -77,7 +99,7 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
 
 
         InitApplication.getCurrentActivity().runOnUiThread {
-            showBuzzerPopup(bellId.toString(), InitApplication.getCurrentActivity());
+            showBuzzerPopup(bellId[0], InitApplication.getCurrentActivity());
         }
 
         return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain", "true");
@@ -106,12 +128,12 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         setBtn.setOnClickListener {
             //minute 계산하는 로직
             val minute = timePicker.hour * 60 + timePicker.minute
-            showCustomDialog2(bellId, minute, context)
+            showCustomDialog2(bellId, minute, context, dialog2)
         }
         dialog2.show()
     }
 
-    private fun showCustomDialog2(bellId: String, minute: Int, context: Context) {
+    private fun showCustomDialog2(bellId: String, minute: Int, context: Context, parent: Dialog) {
         val dialog2 = Dialog(context)
         dialog2.setContentView(R.layout.custom_dlg)
 
@@ -128,8 +150,10 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
             //만약에 이전에 정보가 있으면 덮어쓰기 됨.
             vibratingBellTimeService.setTime(bellId = bellId, minute = minute);
 
+
             //Todo. 서버에 전송 필요
             dialog2.dismiss() // 다이얼로그 닫기
+            parent.dismiss();
         }
 
         cancelBtn.setOnClickListener {

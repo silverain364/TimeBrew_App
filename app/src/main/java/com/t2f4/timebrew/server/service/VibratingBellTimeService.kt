@@ -22,7 +22,7 @@ class VibratingBellTimeService {
 
     fun setTime(bellId: String, minute: Int){
         vibratingBellTimeRepository.save(VibratingBellTimeDto(
-            LocalDateTime.now(), minute, LocalDateTime.now().plusMinutes(minute as Long), bellId
+            LocalDateTime.now(), minute, LocalDateTime.now().plusMinutes(minute + 0L), bellId
         ))
     }
 
@@ -33,10 +33,10 @@ class VibratingBellTimeService {
 
     fun reamingTime(bellId: String): Int{
         if(!vibratingBellTimeRepository.existById(bellId))
-            return -1;
+            return 0;
 
         val vibratingBellTimeDto = vibratingBellTimeRepository.findById(bellId)!!
-        return Duration.between(vibratingBellTimeDto.end, LocalDateTime.now()).toMinutes() as Int;
+        return Duration.between(LocalDateTime.now(), vibratingBellTimeDto.end).toMinutes().toInt();
     }
 
     fun reamingTimePercent(bellId: String): Float {
@@ -45,7 +45,7 @@ class VibratingBellTimeService {
 
         val vibratingBellTimeDto = vibratingBellTimeRepository.findById(bellId)!!
 
-        return Duration.between(vibratingBellTimeDto.end, LocalDateTime.now())
-            .toMinutes() as Float / vibratingBellTimeDto.minute;
+        return Duration.between(LocalDateTime.now(), vibratingBellTimeDto.end)
+            .toMinutes().toFloat() / vibratingBellTimeDto.minute;
     }
 }

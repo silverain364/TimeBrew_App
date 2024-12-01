@@ -18,25 +18,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.api.RetrofitSetting;
+import com.t2f4.timebrew.server.dto.VibratingBellTimeDto;
+import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository;
+import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository;
+import com.t2f4.timebrew.server.repository.TableRepository;
+import com.t2f4.timebrew.server.service.VibratingBellTimeService;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class TableViewFragment extends Fragment {
+    private ScheduledExecutorService scheduledExecutorService;
 
     public WebView table_view;
     private Button table_check;
     private List<Integer> tableNumberList = new ArrayList<>();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
+    private TableRepository tableRepository = new TableRepository();
+    private TableAndRecognitionDeviceRepository tableAndRecognitionDeviceRepository = new TableAndRecognitionDeviceRepository();
+    private RecognitionDeviceRepository recognitionDeviceRepository = new RecognitionDeviceRepository();
+    private VibratingBellTimeService vibratingBellTimeService = new VibratingBellTimeService();
+
     //화면 재실행 시 reload!
     @Override
     public void onViewStateRestored(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         table_view.reload();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        scheduledExecutorService.shutdown();
     }
 
     @Nullable
@@ -70,7 +88,7 @@ public class TableViewFragment extends Fragment {
         table_view.addJavascriptInterface(this, "AndroidInterface");
 
         //웹 뷰가 보여줄 웹 문서 로드
-        table_view.loadUrl(RetrofitSetting.FILE_URL+ "/" + auth.getUid() + "/table.html");
+        table_view.loadUrl(RetrofitSetting.FILE_URL + "/" + auth.getUid() + "/table.html");
 
 
         // table_check 버튼 클릭 시 팝업 다이얼로그 표시
@@ -95,25 +113,21 @@ public class TableViewFragment extends Fragment {
     }
 
     @JavascriptInterface
-    public void selectTable(int tableId){
+    public void selectTable(int tableId) {
         Log.d("javascript", "selectTable: " + tableId);
         showPopup();
     }
 
     @JavascriptInterface
-    public void loadCompleteJavascript(){
+    public void loadCompleteJavascript() {
         getActivity().runOnUiThread(() -> {
             table_view.evaluateJavascript("javascript:getTableNumbers()", value -> {
-                Log.d("javascript", value.toString());
-                Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("javascript", "source : " + value.toString());
 
                 try {
-                    Log.d("javascript", value.toString());
-                    Toast.makeText(getContext(), value.toString(), Toast.LENGTH_SHORT).show();
-                    if(value.toString().equals("null")) return;
+                    if (value.toString().equals("null")) return;
 
                     JSONArray jsonArray = new JSONArray(value.toString());
-
                     for (int i = 0; i < jsonArray.length(); i++)
                         tableNumberList.add(jsonArray.getInt(i));
 
@@ -122,7 +136,30 @@ public class TableViewFragment extends Fragment {
                     throw new RuntimeException(e);
                 }
             });
+
+            scheduledExecutorService = new ScheduledThreadPoolExecutor(1); //셧다운 후에 재사용이 불가능함으로 필요할 때마다 새로인 인스턴스를 생성시킴
+            tableTimeUpdateStart();
         });
+    }
+
+    public void tableTimeUpdateStart(){
+        scheduledExecutorService.scheduleAtFixedRate(() ->{
+            try {
+                Log.d("thread", "table update!");
+                getActivity().runOnUiThread(() -> {
+                    tableRepository.findAll().stream().forEach(dto -> {
+                        setTableTime(dto.getTableId(),
+                                dto.getBellId() != null ? vibratingBellTimeService.reamingTime(dto.getBellId()) : 0);
+                    });
+                });
+            }catch (Exception e){
+                Log.d("thread", "perhaps move page?");
+            }
+        }, 0, 1, TimeUnit.MINUTES); //1분 간격으로 실행
+    }
+
+    public void setTableTime(int tableId, int minute){
+        table_view.evaluateJavascript("javascript:setTableTime("+ tableId + " , " + minute + ")", null);
     }
 
     // 팝업 다이얼로그 표시 메서드

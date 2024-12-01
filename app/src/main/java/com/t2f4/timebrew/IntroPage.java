@@ -11,10 +11,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
 import com.t2f4.timebrew.server.RESTManager;
+import com.t2f4.timebrew.server.dto.RecognitionDeviceDto;
+import com.t2f4.timebrew.server.dto.TableDto;
+import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository;
+import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository;
+import com.t2f4.timebrew.server.repository.TableRepository;
 
 import java.io.IOException;
 
 public class IntroPage extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,7 @@ public class IntroPage extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
         RESTManager restManager = RESTManager.Companion.getInstace(8080, this.getApplicationContext());
+        setTestData();
 
         try {
             restManager.start();
@@ -42,6 +49,16 @@ public class IntroPage extends AppCompatActivity {
         }, 3000); // 3000밀리초 = 3초
     }
 
+    public void setTestData(){
+        TableRepository tableRepository = new TableRepository();
+        RecognitionDeviceRepository recognitionDeviceRepository = new RecognitionDeviceRepository();
+        TableAndRecognitionDeviceRepository tableAndRecognitionDeviceRepository = new TableAndRecognitionDeviceRepository();
 
+        for (int i = 1; i <= 4; i++) {
+            tableRepository.save(new TableDto(i, null));
+            recognitionDeviceRepository.save(new RecognitionDeviceDto(i));
+            tableAndRecognitionDeviceRepository.save(i, i);
+        }
+    }
 
 }

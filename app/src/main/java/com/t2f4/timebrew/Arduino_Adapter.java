@@ -74,8 +74,6 @@ public class Arduino_Adapter extends RecyclerView.Adapter<Arduino_Adapter.ViewHo
         ids.add(id);
     }
 
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         public ViewHolder(@NonNull View itemView) {

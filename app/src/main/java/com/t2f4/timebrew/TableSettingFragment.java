@@ -107,6 +107,7 @@ public class TableSettingFragment extends Fragment {
         Log.d("javascript", "removed table : " + jsonArrayAddedTableIds);
 
 
+        //Todo. 파일이 정상적으로 저장되면 그 뒤에 저장해야 할것 같다.
         try {
             JSONArray jsonArray;
             jsonArray = new JSONArray(jsonArrayAddedTableIds);
@@ -126,7 +127,7 @@ public class TableSettingFragment extends Fragment {
 
         //1. Repository에 저장
         addedTableIds.forEach(tableId ->
-                tableRepository.save(new TableDto(tableId)));
+                tableRepository.save(new TableDto(tableId, null)));
 
         removedTableIds.forEach(tableId -> {
             tableRepository.delete(tableId);
