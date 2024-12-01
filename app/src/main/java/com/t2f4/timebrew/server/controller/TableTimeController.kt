@@ -1,6 +1,5 @@
 package com.t2f4.timebrew.server.controller
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
@@ -9,6 +8,8 @@ import android.widget.TextView
 import android.widget.TimePicker
 import com.t2f4.timebrew.InitApplication
 import com.t2f4.timebrew.R
+import com.t2f4.timebrew.TableViewFragment
+import com.t2f4.timebrew.TemplatePage
 import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository
 import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository
 import com.t2f4.timebrew.server.repository.TableRepository
@@ -28,6 +29,7 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         session: NanoHTTPD.IHTTPSession?
     ): NanoHTTPD.Response {
         Log.d("http", session?.parameters.toString());
+
         //Todo. Server로 부터 아두이노 남은 시간 가져오기 또는 저장된 아두이노 시간 정보 가져오기
         val bellId = session?.parameters?.get("bellId") //bellId가 없다면
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist bellId");
@@ -54,12 +56,30 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain", "-2.0")
 
         //좌석 최신화
-        tableRepository.deleteByBellId(bellId[0]) //기존에 테이블 연결은 삭제
+        val leaveTable = tableRepository.findByBellId(bellId[0]) //기존에 테이블 연결은 삭제
+        if (leaveTable != null) {
+            leaveTable?.bellId = null;
+            tableRepository.save(leaveTable)
+        };
+
+
         table.bellId = bellId[0]
         tableRepository.save(table) //세로운 테이블 저장
 
+
+        val templatePage = InitApplication.getCurrentActivity();
+        if(templatePage is TemplatePage){ //template page라면
+            val viewFragment = templatePage.nowFragment
+            if(viewFragment is TableViewFragment) //TableViewFragmetn라면
+                templatePage.runOnUiThread {
+                    viewFragment.setTableTime(table.tableId.toInt(), //table 최신화
+                        vibratingBellTimeService.reamingTime(bellId[0]))
+                }
+        }
+
         //남은 시간을 percent로 받음
         val reamingTimePercent = vibratingBellTimeService.reamingTimePercent(bellId[0]);
+
 
         //남은 시간을 반환
         return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain",
@@ -71,7 +91,6 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         urlParams: MutableMap<String, String>?,
         session: NanoHTTPD.IHTTPSession?
     ): NanoHTTPD.Response {
-        return super.delete(uriResource, urlParams, session)
         val deviceIdString = session?.parameters?.get("deviceId") //deviceId가 없다면
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "not exist deviceId");
 
@@ -85,6 +104,16 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
 
         table?.bellId = null
         tableRepository.save(table)
+        val templatePage = InitApplication.getCurrentActivity();
+        if(templatePage is TemplatePage){ //template page라면
+            val viewFragment = templatePage.nowFragment
+            if(viewFragment is TableViewFragment) //TableViewFragmetn라면
+                templatePage.runOnUiThread {
+                    viewFragment.setTableTime(table.tableId.toInt(), 0)
+                }
+        }
+
+        return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain", "ok")
     }
 
     override fun post( //특정 아두이노에 시간 할당

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 
@@ -83,5 +84,9 @@ public class TemplatePage extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayoutContainer, new MainFragment())
                 .commit();
+    }
+
+    public Fragment getNowFragment(){
+        return getSupportFragmentManager().getFragments().get(0);
     }
 }
