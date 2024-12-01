@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.675">
 
         <TextView
                 android:layout_width="580dp"
@@ -45,7 +45,7 @@
                 android:text="사업자 이름"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_textview_member_info"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
         <TextView
                 android:id="@+id/member_info_name_txt"
@@ -57,7 +57,7 @@
                 android:hint="김사장"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_edittext_signup"
-                android:translationX="200dp" />
+                android:translationX="200dp"/>
         <TextView
                 android:layout_width="580dp"
                 android:layout_height="60dp"
@@ -66,7 +66,7 @@
                 android:text="카페명"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_textview_member_info"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
         <TextView
                 android:id="@+id/member_info_cafename_txt"
@@ -79,7 +79,7 @@
                 android:hint="커피홀릭"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_edittext_signup"
-                android:translationX="200dp" />
+                android:translationX="200dp"/>
         <TextView
                 android:layout_width="580dp"
                 android:layout_height="60dp"
@@ -88,7 +88,7 @@
                 android:text="이메일"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_textview_member_info"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
         <TextView
                 android:id="@+id/member_info_email_txt"
                 android:layout_marginTop="5dp"
@@ -100,50 +100,29 @@
                 android:hint="abc123@gmail.com"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_edittext_signup"
-                android:translationX="200dp" />
+                android:translationX="200dp"/>
         <TextView
                 android:layout_width="580dp"
                 android:layout_height="60dp"
                 android:translationY="270dp"
-                android:paddingTop="15dp"
-                android:text="아이디"
-                android:paddingStart="25dp"
-                android:background="@drawable/solid_textview_member_info"
-                android:textSize="20sp" />
-
-        <TextView
-                android:layout_marginTop="5dp"
-                android:layout_width="370dp"
-                android:layout_height="50dp"
-                android:translationY="270dp"
-                android:paddingTop="10dp"
-                android:textSize="20dp"
-                android:hint="kim123123"
-                android:paddingStart="25dp"
-                android:background="@drawable/solid_edittext_signup"
-                android:translationX="200dp" />
-        <TextView
-                android:layout_width="580dp"
-                android:layout_height="60dp"
-                android:translationY="360dp"
                 android:paddingTop="15dp"
                 android:text="전화번호"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_textview_member_info"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
         <TextView
                 android:id="@+id/member_info_PhNum_txt"
                 android:layout_marginTop="5dp"
                 android:layout_width="370dp"
                 android:layout_height="50dp"
-                android:translationY="360dp"
+                android:translationY="270dp"
                 android:textSize="20dp"
                 android:paddingTop="10dp"
                 android:hint="010-1234-5678"
                 android:paddingStart="25dp"
                 android:background="@drawable/solid_edittext_signup"
-                android:translationX="200dp" />
+                android:translationX="200dp"/>
 
     </FrameLayout>
     <Button
@@ -152,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="확  인"
             android:background="@drawable/solid_button"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="50dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
