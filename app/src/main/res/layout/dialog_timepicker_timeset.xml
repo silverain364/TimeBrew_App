@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="280dp"
+        android:layout_height="380dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="30dp"
+            android:text="테이블 시간 수정"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+
+
+    <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:timePickerMode="spinner" />
+
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/tp_ok"
+            android:text="확인"
+            android:backgroundTint="@color/btn_color"
+            app:layout_constraintTop_toBottomOf="@+id/timePicker"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="120dp"
+
+    />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/tp_cancle"
+            android:text="취소"
+            android:backgroundTint="@color/btn_color"
+            app:layout_constraintTop_toBottomOf="@+id/timePicker"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="120dp"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
