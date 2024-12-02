@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.*;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.api.RetrofitSetting;
+import com.t2f4.timebrew.server.dto.TableDto;
 import com.t2f4.timebrew.server.dto.VibratingBellTimeDto;
 import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository;
 import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository;
@@ -27,9 +30,12 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.logging.SimpleFormatter;
 
 public class TableViewFragment extends Fragment {
     private ScheduledExecutorService scheduledExecutorService;
@@ -76,7 +82,6 @@ public class TableViewFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-
                 view.evaluateJavascript("javascript:loadViewJs()", null);
             }
         });
@@ -95,7 +100,7 @@ public class TableViewFragment extends Fragment {
         table_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup();
+                //showPopup();
             }
         });
 
@@ -115,7 +120,14 @@ public class TableViewFragment extends Fragment {
     @JavascriptInterface
     public void selectTable(int tableId) {
         Log.d("javascript", "selectTable: " + tableId);
-        showPopup();
+        TableDto table = tableRepository.findById(tableId);
+        if(table.getBellId() == null) {
+            getActivity().runOnUiThread(() -> {
+                Toast.makeText(getActivity(),"현재 : " + tableId +"번 테이블에 진동벨이 없습니다", Toast.LENGTH_SHORT).show();
+            });
+            return;
+        }
+        showPopup(table);
     }
 
     @JavascriptInterface
@@ -130,6 +142,12 @@ public class TableViewFragment extends Fragment {
                     JSONArray jsonArray = new JSONArray(value.toString());
                     for (int i = 0; i < jsonArray.length(); i++)
                         tableNumberList.add(jsonArray.getInt(i));
+
+                    tableNumberList.forEach(tableId -> {
+                        //연결 항목에 없으면 disConnect로 변경
+                        if(tableAndRecognitionDeviceRepository.findByTableId(tableId) == null)
+                            table_view.evaluateJavascript("javascript:disConnectTable(" + tableId + ")", null);
+                    });
 
                     Log.d("javascript", "convert : " + tableNumberList);
                 } catch (JSONException e) {
@@ -163,28 +181,46 @@ public class TableViewFragment extends Fragment {
     }
 
     // 팝업 다이얼로그 표시 메서드
-    private void showPopup() {
+    private void showPopup(TableDto table) {
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.table_info);
+        VibratingBellTimeDto bell = vibratingBellTimeService.findById(table.getBellId());
+
 
         // 팝업 다이얼로그 크기 설정
-        int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.52);
-        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.5);
-        dialog.getWindow().setLayout(width, height);
+        //int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.52);
+        //int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.5);
+        //dialog.getWindow().setLayout(width, height);
 
         // table_info 팝업 안의 time_retouch 버튼 찾기
         Button time_retouch = dialog.findViewById(R.id.time_retouch);
+        TextView tableNumTv = dialog.findViewById(R.id.table_num);
+        EditText enterTimeEt  = dialog.findViewById(R.id.enter_time);
+        EditText setTimeEt = dialog.findViewById(R.id.set_time);
+        EditText leftTimeEt = dialog.findViewById(R.id.left_time);
+
+
+        tableNumTv.setText(table.getTableId() + "번 테이블");
+        enterTimeEt.setText(bell.getStart().format(DateTimeFormatter.ofPattern("HH:mm")));
+        setTimeEt.setText(minuteFormat(bell.getMinute()));
+        leftTimeEt.setText(minuteFormat(vibratingBellTimeService.reamingTime(bell.getBellId())));
 
         // time_retouch 버튼 클릭 시 customDialog 표시
-        time_retouch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCustomDialog();
-            }
+        time_retouch.setOnClickListener(v -> showCustomDialog());
+        setTimeEt.setOnClickListener(v -> {
+
         });
+
 
         dialog.show();
     }
+
+
+    private String minuteFormat(int minute){
+        return String.format("%02d", minute / 60) + ":" +
+                String.format("%02d", minute % 60);
+    }
+
 
     // customDialog 표시 메서드
     private void showCustomDialog() {
@@ -200,30 +236,27 @@ public class TableViewFragment extends Fragment {
         Button dlg_ok_btn = dialog.findViewById(R.id.dlg_ok_btn);
         Button dlg_cancle_btn = dialog.findViewById(R.id.dlg_cancle_btn);
 
-        dlg_ok_btn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    dialog.dismiss();  // 다이얼로그 닫기
-                    v.performClick();  // 경고 해결을 위해 performClick 호출
-                }
-                return true;
+        dlg_ok_btn.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                dialog.dismiss();  // 다이얼로그 닫기
+                v.performClick();  // 경고 해결을 위해 performClick 호출
             }
+            return true;
         });
 
-        dlg_cancle_btn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    dialog.dismiss();  // 다이얼로그 닫기
-                    v.performClick();  // 경고 해결을 위해 performClick 호출
-                }
-                return true;
+        dlg_cancle_btn.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                dialog.dismiss();  // 다이얼로그 닫기
+                v.performClick();  // 경고 해결을 위해 performClick 호출
             }
+            return true;
         });
 
         dialog.show();  // 다이얼로그 표시
     }
+
+
+
 
 
 }
