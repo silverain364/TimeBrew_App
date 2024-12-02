@@ -143,7 +143,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/set_time"
-                android:background="@drawable/solid_button"
+                android:background="@drawable/solid_textview_member_info"
                 android:layout_marginTop="100dp"
                 android:text="진동벨 울리기"
                 android:textSize="23dp"
