@@ -21,6 +21,7 @@ public class TemplatePage extends AppCompatActivity {
     private MemberInfoPage memberInfoPage;
     private ArduinoPage arduinoPage;
     private TableViewFragment tableViewFragment;
+    private VibratingBellPage vibratingBellPage;
 
 
 
@@ -38,6 +39,7 @@ public class TemplatePage extends AppCompatActivity {
         memberInfoPage = new MemberInfoPage();
         arduinoPage = new ArduinoPage();
         tableViewFragment = new TableViewFragment();
+        vibratingBellPage = new VibratingBellPage();
 
 
         hamburgerButton.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +73,11 @@ public class TemplatePage extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_table_view_page) {
                     fragmentManager.beginTransaction()
                             .replace(R.id.frameLayoutContainer, tableViewFragment)
+                            .addToBackStack(null)
+                            .commit();
+                } else if (item.getItemId() == R.id.nav_vibratingbell_page) {
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frameLayoutContainer, vibratingBellPage)
                             .addToBackStack(null)
                             .commit();
                 }

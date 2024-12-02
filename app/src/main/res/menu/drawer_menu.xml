@@ -27,5 +27,7 @@
     <item
             android:id="@+id/nav_arduino_page"
             android:title="장치ID 부여" />
-
+    <item
+            android:id="@+id/nav_vibratingbell_page"
+            android:title="진동벨 관리" />
 </menu>
