@@ -1,8 +1,10 @@
 package com.t2f4.timebrew.server
 
 import android.content.Context
+import com.t2f4.timebrew.server.controller.BellController
 import com.t2f4.timebrew.server.controller.TableSetController
 import com.t2f4.timebrew.server.controller.TableTimeController
+import com.t2f4.timebrew.server.repository.BellMessageRepository
 import fi.iki.elonen.router.RouterNanoHTTPD
 
 //싱글톤
@@ -26,6 +28,7 @@ class RESTManager(private val port: Int) : RouterNanoHTTPD(port) {
     init {
         addRoute("/time", TableTimeController::class.java)
         addRoute("/msg", TableSetController::class.java)
+        addRoute("/bell", BellController::class.java)
     }
 
 }

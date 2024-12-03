@@ -22,7 +22,7 @@ class TableSetController : RouterNanoHTTPD.GeneralHandler() {
         Log.d("http", "param : " + session?.parameters?.keys)
 
         //인식장치 id 받기
-        val deviceIdString = session?.parameters?.get("id")?.get(0)
+        val deviceIdString = session?.parameters?.get("deviceId")?.get(0)
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "", "not exist id!");
 
         val deviceId = Integer.valueOf(deviceIdString) as Integer
