@@ -126,9 +126,11 @@ class TableTimeController : RouterNanoHTTPD.GeneralHandler(){
         val bellId = session?.parameters?.get("bellId")
             ?: return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.BAD_REQUEST, "text/plain", "exist not bellId");
 
-
-        InitApplication.getCurrentActivity().runOnUiThread {
-            showBuzzerPopup(bellId[0], InitApplication.getCurrentActivity());
+        val activity = InitApplication.getCurrentActivity();
+        if(activity is TemplatePage){ //template 페이지만 보여준다.
+            activity.runOnUiThread {
+                showBuzzerPopup(bellId[0], activity)
+            }
         }
 
         return NanoHTTPD.newFixedLengthResponse(NanoHTTPD.Response.Status.OK, "text/plain", "true");
