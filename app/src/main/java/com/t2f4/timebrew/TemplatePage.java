@@ -22,6 +22,7 @@ public class TemplatePage extends AppCompatActivity {
     private ArduinoPage arduinoPage;
     private TableViewFragment tableViewFragment;
     private VibratingBellPage vibratingBellPage;
+    private String username = "아잇코";
 
 
 
@@ -55,6 +56,7 @@ public class TemplatePage extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 if (item.getItemId() == R.id.nav_member_info_page) {
                     fragmentManager.beginTransaction()
                             .replace(R.id.frameLayoutContainer, memberInfoPage)
@@ -86,7 +88,6 @@ public class TemplatePage extends AppCompatActivity {
                 return true;
             }
         });
-        ;
         // `MainPageFragment`를 `frameLayoutContainer`에 추가
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayoutContainer, new MainFragment())

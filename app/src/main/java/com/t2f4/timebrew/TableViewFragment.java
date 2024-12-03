@@ -9,10 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.*;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -20,12 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.t2f4.timebrew.api.RetrofitSetting;
+import com.t2f4.timebrew.application.DialogService;
 import com.t2f4.timebrew.server.dto.TableDto;
 import com.t2f4.timebrew.server.dto.VibratingBellTimeDto;
 import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository;
 import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository;
 import com.t2f4.timebrew.server.repository.TableRepository;
 import com.t2f4.timebrew.server.service.VibratingBellTimeService;
+import com.t2f4.timebrew.util.CustomCallback;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,9 +38,9 @@ import java.util.logging.SimpleFormatter;
 
 public class TableViewFragment extends Fragment {
     private ScheduledExecutorService scheduledExecutorService;
+    private DialogService dialogService = new DialogService();
 
     public WebView table_view;
-    private Button table_check;
     private List<Integer> tableNumberList = new ArrayList<>();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -70,7 +69,6 @@ public class TableViewFragment extends Fragment {
         View root = inflater.inflate(R.layout.table_view, container, false);
 
         table_view = root.findViewById(R.id.table_view);
-        table_check = root.findViewById(R.id.table_check);
 
 //      웹뷰의 설정을 통해 JS 사용을 허용하도록 변경
         WebSettings settings = table_view.getSettings();
@@ -95,14 +93,6 @@ public class TableViewFragment extends Fragment {
         //웹 뷰가 보여줄 웹 문서 로드
         table_view.loadUrl(RetrofitSetting.FILE_URL + "/" + auth.getUid() + "/table.html");
 
-
-        // table_check 버튼 클릭 시 팝업 다이얼로그 표시
-        table_check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //showPopup();
-            }
-        });
 
         return root;
     }
@@ -206,14 +196,25 @@ public class TableViewFragment extends Fragment {
         leftTimeEt.setText(minuteFormat(vibratingBellTimeService.reamingTime(bell.getBellId())));
 
         // time_retouch 버튼 클릭 시 customDialog 표시
-        time_retouch.setOnClickListener(v -> showCustomDialog());
+        time_retouch.setOnClickListener(v ->
+                showCustomDialog(bell)
+        );
         setTimeEt.setOnClickListener(v -> {
-
+            dialogService.timePickerDialog(
+                    getActivity(),
+                    vibratingBellTimeService,
+                    bell,
+                    () -> {
+                VibratingBellTimeDto changeBell = bell;
+                setTimeEt.setText(minuteFormat(changeBell.getMinute()));
+                leftTimeEt.setText(minuteFormat(vibratingBellTimeService.reamingTime(changeBell.getBellId())));
+            });
         });
 
 
         dialog.show();
     }
+
 
 
     private String minuteFormat(int minute){
@@ -223,7 +224,7 @@ public class TableViewFragment extends Fragment {
 
 
     // customDialog 표시 메서드
-    private void showCustomDialog() {
+    private void showCustomDialog(VibratingBellTimeDto bell) {
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.custom_dlg);
 
@@ -238,6 +239,7 @@ public class TableViewFragment extends Fragment {
 
         dlg_ok_btn.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
+                vibratingBellTimeService.save(bell);
                 dialog.dismiss();  // 다이얼로그 닫기
                 v.performClick();  // 경고 해결을 위해 performClick 호출
             }
