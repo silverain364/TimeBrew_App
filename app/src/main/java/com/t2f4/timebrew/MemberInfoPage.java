@@ -3,12 +3,14 @@ package com.t2f4.timebrew;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,11 +45,12 @@ public class MemberInfoPage extends Fragment {
             @Override
             public void onResponse(Call<UserInfoDto> call, Response<UserInfoDto> response) {
                 UserInfoDto userInfoDto = response.body();
+                Log.d("server", userInfoDto.toString());
                 if(userInfoDto == null) return;
 
-                nameTv.setText(userInfoDto.getUsername());
-                cafeNameTv.setText(userInfoDto.getWorkplaceName());
-                phoneTv.setText(userInfoDto.getPhoneNumber());
+                nameTv.setText(userInfoDto.getUserName());
+                cafeNameTv.setText(userInfoDto.getWorkplace());
+                phoneTv.setText(userInfoDto.getPhone());
                 emailTv.setText(userInfoDto.getEmail());
             }
             @Override

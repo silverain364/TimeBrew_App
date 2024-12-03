@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import com.t2f4.timebrew.dto.ConnectInfoDto;
+import com.t2f4.timebrew.server.dto.TableDto;
 import com.t2f4.timebrew.server.repository.RecognitionDeviceRepository;
 import com.t2f4.timebrew.server.repository.TableAndRecognitionDeviceRepository;
 import com.t2f4.timebrew.server.repository.TableRepository;
@@ -125,6 +126,10 @@ public class ArduinoPage extends Fragment {
             //Repository 최신화
             tableAndRecognitionDeviceRepository.deleteByTableId(disConnectDto.getTableId());
 
+            //만약 벨 정보가 있었다면 초기화
+            TableDto tableDto = tableRepository.findById(disConnectDto.getTableId());
+            tableDto.setBellId(null);
+
             arduinoAdapter.addItem(disConnectDto.getDeviceId());
             tableAdapter.addItem(disConnectDto.getTableId());
             arduinoAdapter.notifyItemInserted(arduinoAdapter.getItemCount());
@@ -140,6 +145,7 @@ public class ArduinoPage extends Fragment {
 
             Integer tableId = tableAdapter.removeSelectList();
             Integer arduinoId = arduinoAdapter.removeSelectList();
+
 
             //Todo. 서버 통신
 

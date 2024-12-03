@@ -12,6 +12,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.t2f4.timebrew.api.RetrofitSetting;
+import com.t2f4.timebrew.api.UserApi;
+import com.t2f4.timebrew.dto.UserInfoDto;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TemplatePage extends AppCompatActivity {
 
@@ -23,6 +30,8 @@ public class TemplatePage extends AppCompatActivity {
     private TableViewFragment tableViewFragment;
     private VibratingBellPage vibratingBellPage;
     private String username = "아잇코";
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private UserApi userApi = RetrofitSetting.Companion.getRetrofit().create(UserApi.class);
 
 
 
@@ -92,6 +101,18 @@ public class TemplatePage extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayoutContainer, new MainFragment())
                 .commit();
+
+        userApi.findUserInfo(auth.getUid()).enqueue(new Callback<UserInfoDto>() {
+            @Override
+            public void onResponse(Call<UserInfoDto> call, Response<UserInfoDto> response) {
+                if(response.body() != null)
+                 navigationView.getMenu().findItem(R.id.nav_app_info).setTitle(response.body().getUserName());
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoDto> call, Throwable throwable) {}
+        });
+
     }
 
     public Fragment getNowFragment(){

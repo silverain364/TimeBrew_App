@@ -104,7 +104,6 @@ class BellIdAdapter extends RecyclerView.Adapter<BellIdAdapter.ViewHolder>{
             }
 
             boolean bive = vibeMap.get(selectBell.getBellId());
-
             if(bive){
                 vibeMap.put(selectBell.getBellId(), false);
                 message.add("normal");
