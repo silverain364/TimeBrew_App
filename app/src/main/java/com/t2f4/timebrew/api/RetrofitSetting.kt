@@ -9,7 +9,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 class RetrofitSetting {
     companion object {
         //const val URL = "http://49.50.164.110:8080/"
-        const val URL = "http://172.30.1.98:8080/"
+//        const val URL = "http://172.111.120.38:8080/"
+        private const val URL = "http://192.168.27.71:8080/"
         const val FILE_URL = "http://49.50.164.110:8071/test2/users"
 
 

@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class Arduino_Adapter extends RecyclerView.Adapter<Arduino_Adapter.ViewHolder> {
+public class ArduinoAdapter extends RecyclerView.Adapter<ArduinoAdapter.ViewHolder> {
     private List<Integer> ids ;
     private String prefix;
     private TextView selectTv;
     private int selectNumber = -1;
     private View selectItemView = null;
 
-    public Arduino_Adapter(String prefix, List<Integer> ids, TextView selectTv) {
+    public ArduinoAdapter(String prefix, List<Integer> ids, TextView selectTv) {
         this.ids = ids;
         this.selectTv = selectTv;
         this.prefix = prefix;
@@ -26,13 +26,13 @@ public class Arduino_Adapter extends RecyclerView.Adapter<Arduino_Adapter.ViewHo
 
     @NonNull
     @Override
-    public Arduino_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArduinoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.arduino_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Arduino_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArduinoAdapter.ViewHolder holder, int position) {
         holder.textView.setText(prefix + " : " + ids.get(position));
 
         holder.itemView.setOnClickListener(v -> {

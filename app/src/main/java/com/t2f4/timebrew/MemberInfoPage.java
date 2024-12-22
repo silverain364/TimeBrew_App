@@ -59,8 +59,6 @@ public class MemberInfoPage extends Fragment {
             }
         });
 
-
-
         // 버튼에 클릭 리스너 설정
         memberInfoCheckBtn.setOnClickListener(new View.OnClickListener() {
             @Override

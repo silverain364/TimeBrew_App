@@ -10,22 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class Table_Adapter extends RecyclerView.Adapter<Table_Adapter.ViewHolder> {
+public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
     private List<String> dummyData2;
-
-    public Table_Adapter(List<String> dummyData) {
-        this.dummyData2 = dummyData;
-    }
-
     @NonNull
     @Override
-    public Table_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TableAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.table_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Table_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TableAdapter.ViewHolder holder, int position) {
         holder.textView.setText(dummyData2.get(position) + " / " +dummyData2.size());
 
     }

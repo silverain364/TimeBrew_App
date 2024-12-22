@@ -39,7 +39,6 @@ import java.util.logging.SimpleFormatter;
 public class TableViewFragment extends Fragment {
     private ScheduledExecutorService scheduledExecutorService;
     private DialogService dialogService = new DialogService();
-
     public WebView table_view;
     private List<Integer> tableNumberList = new ArrayList<>();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -48,6 +47,7 @@ public class TableViewFragment extends Fragment {
     private TableAndRecognitionDeviceRepository tableAndRecognitionDeviceRepository = new TableAndRecognitionDeviceRepository();
     private RecognitionDeviceRepository recognitionDeviceRepository = new RecognitionDeviceRepository();
     private VibratingBellTimeService vibratingBellTimeService = new VibratingBellTimeService();
+
 
     //화면 재실행 시 reload!
     @Override

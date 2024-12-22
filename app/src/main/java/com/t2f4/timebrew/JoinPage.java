@@ -94,7 +94,7 @@ public class JoinPage extends AppCompatActivity {
                     userApi.join(userDto).enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Toast.makeText(JoinPage.this, response.body(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JoinPage.this, response.body().replaceAll("\\n", ""), Toast.LENGTH_SHORT).show();
                             //임시로 메인으로 이동시킴
                             startActivity(new Intent(JoinPage.this, TemplatePage.class));
                         }

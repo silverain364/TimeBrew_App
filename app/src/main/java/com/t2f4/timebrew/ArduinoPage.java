@@ -30,8 +30,8 @@ public class ArduinoPage extends Fragment {
     private RecyclerView uncon_t_list;
     private RecyclerView conList;
 
-    private Arduino_Adapter arduinoAdapter;
-    private Arduino_Adapter tableAdapter;
+    private ArduinoAdapter arduinoAdapter;
+    private ArduinoAdapter tableAdapter;
     private ConnectedAdapter tmpAdapter;
 
     private LinearLayoutManager layoutManager1;
@@ -93,7 +93,7 @@ public class ArduinoPage extends Fragment {
         uncon_a_list.setLayoutManager(layoutManager1);
         uncon_a_list.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
-        arduinoAdapter = new Arduino_Adapter("DEVICE"
+        arduinoAdapter = new ArduinoAdapter("DEVICE"
                 , disCntDeviceIds
                 , selectConArduinoTv);
 
@@ -106,7 +106,7 @@ public class ArduinoPage extends Fragment {
         uncon_t_list.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
 
-        tableAdapter = new Arduino_Adapter("TABLE"
+        tableAdapter = new ArduinoAdapter("TABLE"
                 , disCntTableIds
                 , selectConTableTv); // Table_Adapter를 초기화
         uncon_t_list.setAdapter(tableAdapter);

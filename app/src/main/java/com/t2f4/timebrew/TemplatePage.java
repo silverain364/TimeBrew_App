@@ -106,7 +106,8 @@ public class TemplatePage extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserInfoDto> call, Response<UserInfoDto> response) {
                 if(response.body() != null)
-                 navigationView.getMenu().findItem(R.id.nav_app_info).setTitle(response.body().getUserName());
+                 navigationView.getMenu().findItem(R.id.nav_app_info).setTitle(
+                         response.body().getUserName() + "님! 지금은 커피를 즐길 시간");
             }
 
             @Override
