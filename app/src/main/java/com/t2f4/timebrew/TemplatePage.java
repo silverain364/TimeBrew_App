@@ -21,7 +21,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TemplatePage extends AppCompatActivity {
-
     private DrawerLayout drawerLayout;
     private FragmentManager fragmentManager;
     private TableSettingFragment tableSettingFragment;
@@ -62,6 +61,7 @@ public class TemplatePage extends AppCompatActivity {
                 }
             }
         });
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -97,11 +97,12 @@ public class TemplatePage extends AppCompatActivity {
                 return true;
             }
         });
+
+
         // `MainPageFragment`를 `frameLayoutContainer`에 추가
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayoutContainer, new MainFragment())
                 .commit();
-
         userApi.findUserInfo(auth.getUid()).enqueue(new Callback<UserInfoDto>() {
             @Override
             public void onResponse(Call<UserInfoDto> call, Response<UserInfoDto> response) {
@@ -115,7 +116,6 @@ public class TemplatePage extends AppCompatActivity {
         });
 
     }
-
     public Fragment getNowFragment(){
         return getSupportFragmentManager().getFragments().get(0);
     }

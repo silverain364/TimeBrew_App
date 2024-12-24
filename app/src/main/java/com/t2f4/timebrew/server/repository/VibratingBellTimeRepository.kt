@@ -10,6 +10,14 @@ class VibratingBellTimeRepository {
                 = HashMap()
     }
 
+    fun deleteById(vibratingBellId: String): VibratingBellTimeDto?{
+        return vibratingBellTimeStore.remove(vibratingBellId)
+    }
+
+    fun deleteAll(){
+        return vibratingBellTimeStore.clear();
+    }
+
     fun findById(vibratingBellId: String): VibratingBellTimeDto?{
         Log.d("repository", "Bell findById : $vibratingBellId")
         return vibratingBellTimeStore[vibratingBellId];

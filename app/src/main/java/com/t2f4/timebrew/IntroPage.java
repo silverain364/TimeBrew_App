@@ -28,15 +28,8 @@ public class IntroPage extends AppCompatActivity {
         setContentView(R.layout.intro_page);
         FirebaseApp.initializeApp(this);
 
-        RESTManager restManager = RESTManager.Companion.getInstace(8080, this.getApplicationContext());
+
         setTestData();
-
-        try {
-            restManager.start();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
 
         // 3초 후에 JoinPage로 이동
         new Handler().postDelayed(new Runnable() {
